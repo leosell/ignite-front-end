@@ -18,6 +18,7 @@ const RegisterEstacionamento = ({ navigation }) => {
     const [ bairro, setBairro ] = useState('')
     const [ cidade, setCidade ] = useState('')
     const [ estado, setEstado ] = useState('')
+    const [ funcionamento, setFuncionamento ] = useState('')
 
     const { height } = useWindowDimensions()
 
@@ -30,7 +31,8 @@ const RegisterEstacionamento = ({ navigation }) => {
                 numero: numero,
                 bairro: bairro,
                 cidade: cidade,
-                estado: estado
+                estado: estado,
+                funcionamento: funcionamento
             })
 
             if (authData.status === 200) {
@@ -42,6 +44,7 @@ const RegisterEstacionamento = ({ navigation }) => {
                 setBairro('')
                 setCidade('')
                 setEstado('')
+                setFuncionamento('')
                 dispatch({ type: 'update', payload: true })
             } else {
                 console.log(authData.data.message)
@@ -60,6 +63,49 @@ const RegisterEstacionamento = ({ navigation }) => {
 
             <CustomInput
                 placeholder='CNPJ'
+                value={cnpj}
+                setValue={setCnpj}
+            />
+            
+            <CustomInput
+                placeholder='Endereço'
+                value={endereco}
+                setValue={setEndereco}
+            />
+            
+            <CustomInput
+                placeholder='Número'
+                value={numero}
+                setValue={setNumero}
+            />
+            
+            <CustomInput
+                placeholder='Bairro'
+                value={bairro}
+                setValue={setBairro}
+            />
+            
+            <CustomInput
+                placeholder='Cidade'
+                value={cidade}
+                setValue={setCidade}
+            />
+            
+            <CustomInput
+                placeholder='Estado'
+                value={estado}
+                setValue={setEstado}
+            />
+
+            <CustomInput
+                placeholder='Funcionamento'
+                value={funcionamento}
+                setValue={setFuncionamento}
+            />
+
+            <CustomButton
+                text='Cadastrar'
+                onPress={onRegisterPressed}
             />
         </View>
     )

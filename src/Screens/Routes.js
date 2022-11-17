@@ -6,7 +6,7 @@ import { Entypo, AntDesign } from '@expo/vector-icons'
 import { Context } from '../Context/authContext'
 
 import Home from './Home'
-import RegisterEstacionamento from './Estacionamento/RegisterEstacionamento'
+import EstacionamentoRoutes from './Estacionamento/EstacionamentoRoutes'
 
 const Tab = createBottomTabNavigator();
 
@@ -35,7 +35,7 @@ const Routes = ({ navigation }) => {
             />
             <Tab.Screen
                 name="Estacionamento"
-                component={RegisterEstacionamento}
+                component={EstacionamentoRoutes}
                 options={{
                     tabBarIcon: () => (
                         <AntDesign name='car' size={30} />
