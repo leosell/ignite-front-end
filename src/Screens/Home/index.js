@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     },
 
     perfil: {
-        margin: 10,
+        margin: 30,
         width: 50,
         height: 50,
         backgroundColor: '#FFC978',
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     },
 
     config: {
-        margin: 10,
+        margin: 30,
         width: 50,
         height: 50,
         backgroundColor: '#FFC978',
