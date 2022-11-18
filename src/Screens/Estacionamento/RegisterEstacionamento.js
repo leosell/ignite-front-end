@@ -1,4 +1,4 @@
-import { StyleSheet, Text, useWindowDimensions, View } from 'react-native'
+import { Picker, StyleSheet, Text, useWindowDimensions, View } from 'react-native'
 import React, { useContext, useState } from 'react'
 
 import CustomButton from '../../Components/CustomButton'
@@ -14,11 +14,12 @@ const RegisterEstacionamento = ({ navigation }) => {
     const [ nome, setNome ] = useState('')
     const [ cnpj, setCnpj ] = useState('')
     const [ endereco, setEndereco ] = useState('')
-    const [ numero, setNumero ] = useState(0)
+    const [ numero, setNumero ] = useState('')
     const [ bairro, setBairro ] = useState('')
     const [ cidade, setCidade ] = useState('')
     const [ estado, setEstado ] = useState('')
     const [ funcionamento, setFuncionamento ] = useState('')
+    const [ horaFuncionamento, setHoraFuncionamento ] = useState('')
 
     const { height } = useWindowDimensions()
 
@@ -97,11 +98,37 @@ const RegisterEstacionamento = ({ navigation }) => {
                 setValue={setEstado}
             />
 
-            <CustomInput
+            <Picker
+                selectedValue={funcionamento}
+                onValueChange={setFuncionamento}
+                style={styles.funcionamento}
+            >
+                <Picker.Item label="Dia de Funcionamento" value="0" />
+                <Picker.Item label="Seg. Sex." value="Seg. Sex." />
+                <Picker.Item label="Seg. Sab." value="Seg. Sab." />
+                <Picker.Item label="Seg. Dom." value="Seg. Dom." />
+            </Picker>
+
+
+            <Picker
+                selectedValue={horaFuncionamento}
+                onValueChange={setHoraFuncionamento}
+                style={styles.hora}
+            >
+                <Picker.Item label="Horario de Funcionamento" value="0" />
+                <Picker.Item label="08h às 18h" value="08h às 18h" />
+                <Picker.Item label="08h às 19h" value="08h às 19h" />
+                <Picker.Item label="08h às 20h" value="08h às 20h" />
+                <Picker.Item label="08h às 21h" value="08h às 21h" />
+                <Picker.Item label="08h às 22h" value="08h às 22h" />
+                <Picker.Item label="24h" value="24h" />
+            </Picker>
+
+            {/* <CustomInput
                 placeholder='Funcionamento'
                 value={funcionamento}
                 setValue={setFuncionamento}
-            />
+            /> */}
 
             <CustomButton
                 text='Cadastrar'
@@ -113,4 +140,15 @@ const RegisterEstacionamento = ({ navigation }) => {
 
 export default RegisterEstacionamento
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    funcionamento: {
+        width: '100%',
+        height: 46,
+        marginVertical: 5
+    },
+
+    hora: {
+        width: '100%',
+        height: 46
+    }
+})

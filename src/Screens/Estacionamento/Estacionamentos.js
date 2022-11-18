@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Button } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import { Entypo, Feather } from '@expo/vector-icons'
 
@@ -7,7 +7,7 @@ import { Context } from '../../Context/authContext'
 import CustomButton from '../../Components/CustomButton'
 
 
-const Estacionamento = ({ navigation }) => {
+const Estacionamentos = ({ navigation }) => {
     const { state, dispatch } = useContext(Context)
 
     const [ estacionamento, setEstacionamento ] = useState({})
@@ -31,24 +31,28 @@ const Estacionamento = ({ navigation }) => {
                 <></>
             )}
 
-            <FlatList
-                data={estacionamento}
-                renderItem={( item ) => {
-                    return (
-                        <View>
-                            <Text>{ item.nome }</Text>
-                            <Feather
-                                name='edit'
-                                size={20}
-                                color='#000'
-                            />
-                        </View>
-                    )
-                }}
-                keyExtractor={(item) => item.id}
-            />
+        <FlatList
+            data={estacionamento}
+            renderItem={({ item }) => {return (
+                <View>
+                    <Text>
+                        { item.nome }
+                    </Text>
+                    
+                    <Text>
+                        { item.cnpj }
+                    </Text>
+
+                    {state.isAdmin ? (
+                        <Button>Excluir</Button>
+                    ) : (
+                        <></>
+                    )}
+                </View>
+            )}}
+        />    
         </View>
     )
 }
 
-export default Estacionamento
+export default Estacionamentos

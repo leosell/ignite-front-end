@@ -11,7 +11,7 @@ const Home = ({ navigation }) => {
 
     return (
         <View>
-            <View>
+            <View style={styles.container}>
                 <View style={styles.view}>
                     <Pressable
                         onPress={() => alert('perfil')}
@@ -25,6 +25,8 @@ const Home = ({ navigation }) => {
                         />
                     </Pressable>
 
+                    <Text>Olá, { state.name }</Text>
+                    
                     <Pressable
                         onPress={() => alert('config')}
                         style={styles.config}
@@ -38,7 +40,6 @@ const Home = ({ navigation }) => {
                     </Pressable>
                     
                 </View>
-                    <Text>Olá, { state.name }</Text>
             </View>
             
             <View>
@@ -61,27 +62,44 @@ const Home = ({ navigation }) => {
 export default Home
 
 const styles = StyleSheet.create({
+    container: {
+        margin: 'auto',
+        width: '100%',
+        height: '15vh'
+    },
+
     view: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        backgroundColor: '#FFBA52',
+        alignItems: 'center',
+        
     },
 
     perfil: {
+        margin: 10,
         width: 50,
         height: 50,
         backgroundColor: '#FFC978',
         borderRadius: 40,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
 
     icon: {
         textAlign: 'center',
-        padding: 8
+        paddingVertical: 'auto',
     },
 
     config: {
+        margin: 10,
         width: 50,
         height: 50,
+        backgroundColor: '#FFC978',
+        borderRadius: 40,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
 
     view_opcoes: {

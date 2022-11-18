@@ -7,6 +7,7 @@ import { Context } from '../Context/authContext'
 
 import Home from './Home'
 import EstacionamentoRoutes from './Estacionamento/EstacionamentoRoutes'
+import RegisterCarteira from './Carteira/RegisterCarteira'
 
 const Tab = createBottomTabNavigator();
 
@@ -43,15 +44,15 @@ const Routes = ({ navigation }) => {
                 }}
             />
             
-            {/* <Tab.Screen
+            <Tab.Screen
                 name="Carteira"
                 component={RegisterCarteira}
                 options={{
                     tabBarIcon: () => (
-                        <Entypo name='fingerprint' size={30} />
+                        <AntDesign name='wallet' size={30} />
                     )
                 }}
-            /> */}
+            />
 
             {/* {state.isAdmin ? (
                 <Tab.Screen
