@@ -39,6 +39,7 @@ const Home = ({ navigation }) => {
                         />
                     </Pressable>
                     
+                    
                 </View>
             </View>
             
