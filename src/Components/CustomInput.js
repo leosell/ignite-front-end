@@ -22,16 +22,14 @@ export default CustomInput
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#FFF',
-        width: '100%',
+        width: '85%',
         marginVertical: 5,
-        border: 'none',
-        borderRadius: 5
+        borderRadius: 20,
+        border: 'none'
     },
 
     input: {
         padding: 15,
         fontWeight: 'bold', 
     },
-
-    
 })
