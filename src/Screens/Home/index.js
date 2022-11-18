@@ -25,8 +25,8 @@ const Home = ({ navigation }) => {
                         />
                     </Pressable>
 
-                    <Text>Olá, { state.name }</Text>
-                    
+                    <Text style={styles.text}>Olá, { state.name }</Text>
+
                     <Pressable
                         onPress={() => alert('config')}
                         style={styles.config}
@@ -39,12 +39,14 @@ const Home = ({ navigation }) => {
                         />
                     </Pressable>
                     
+                    
                 </View>
             </View>
             
-            <View>
+            <View style={styles.conta}>
                 <Text>Conta</Text>
                 <Text>R$ { state.valor }</Text>
+            </View>
                 <Pressable>
                     <AntDesign
                         name='right'
@@ -52,7 +54,6 @@ const Home = ({ navigation }) => {
                         color='#FFC978'
                     />
                 </Pressable>
-            </View>
 
             
         </View>
@@ -112,5 +113,5 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFC978',
         borderRadius: 40,
         width: 45
-    }
+    },
 })
