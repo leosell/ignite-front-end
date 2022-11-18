@@ -51,13 +51,7 @@ const Login = ({ navigation }) => {
                 placeholder="Email"
                 value={email}
                 setValue={setEmail}
-            >
-                <FontAwesome
-                    name="user"
-                    size={50}
-                    color="black"
-                />
-            </CustomInput>
+            />
 
             <CustomInput
                 placeholder="Password"
@@ -70,6 +64,7 @@ const Login = ({ navigation }) => {
 
             <TouchableOpacity
                 onPress={() => navigation.navigate("RegisterUser")}
+                style={styles.register}
             >
                 <Text>
                     Não tem uma conta?{" "}
@@ -89,7 +84,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
-        backgroundColor: '#FFBA52'
+        backgroundColor: '#FFBA52',
     },
     logo: {
         width: '70%',
@@ -100,6 +95,9 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         color: "#6200ee",
     },
+    register: {
+        padding: 5,
+    }
 });
 
 export default Login;

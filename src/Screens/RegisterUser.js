@@ -65,6 +65,7 @@ const RegisterUser = ({ navigation }) => {
             <CustomButton text="Register" onPress={onRegisterPressed} />
             <TouchableOpacity
                 onPress={() => navigation.navigate("Login")}
+                style={styles.register}
             >
                 <Text>
                     Já tem uma conta?{" "}
@@ -91,6 +92,9 @@ const styles = StyleSheet.create({
     loginText: {
         fontWeight: "bold",
         color: "#6200ee",
+    },
+    register: {
+        padding: 5,
     }
 });
 

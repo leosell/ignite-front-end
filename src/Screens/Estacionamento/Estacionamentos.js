@@ -24,35 +24,76 @@ const Estacionamentos = ({ navigation }) => {
 
 
     return (
-        <View>
+        <View style={styles.view}>
             { state.isAdmin ? (
-                <CustomButton text='Novo Estacionamento' onPress={() => navigation.navigate('RegisterEstacionamento')} />
+                <View style={styles.botaoNovo}>
+                    <CustomButton
+                        text='Novo Estacionamento'
+                        onPress={() => navigation.navigate('RegisterEstacionamento')}
+                    />
+                </View>
             ) : (
                 <></>
             )}
 
-        <FlatList
-            data={estacionamento}
-            renderItem={({ item }) => {return (
-                <View>
-                    <Text>
-                        { item.nome }
-                    </Text>
-                    
-                    <Text>
-                        { item.cnpj }
-                    </Text>
+            <View>
+                <FlatList
+                data={estacionamento}
+                renderItem={({ item }) => {return (
+                    <View style={styles.container}>
+                        <Text>
+                            { item.nome }
+                        </Text>
+                        
+                        <Text>
+                            { item.cnpj }
+                        </Text>
 
-                    {state.isAdmin ? (
-                        <Button>Excluir</Button>
-                    ) : (
-                        <></>
-                    )}
-                </View>
-            )}}
-        />    
+                        {state.isAdmin ? (
+                            <View style={styles.containerBotao}>
+                                <Button
+                                    onPress={() => alert('exluido')}
+                                    title='Excluir'
+                                    color='#000'
+                                    style={styles.botao}
+                                />
+                            </View>
+                        ) : (
+                            <></>
+                        )}
+                    </View>
+                )}}
+                keyExtractor={(item) => item.id}
+                />
+            </View>
         </View>
     )
 }
 
 export default Estacionamentos
+
+const styles = StyleSheet.create({
+    view: {
+        flex: 1,
+        flexDirection: 'column'
+    },
+
+    container: {
+        width: '100%',
+        height: '10vh',
+        backgroundColor: '#FFBA52'
+    },
+
+    containerBotao: {
+        width: '20%'
+    },
+
+    botao: {
+        borderRadius: 20
+    },
+
+    botaoNovo: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
+})
