@@ -22,6 +22,7 @@ const RegisterCarteira = () => {
 
             if (authData.status === 200) {
                 alert(authData.data.message)
+                setSaldo('')
             }
         } catch (error) {
           console.log(error)
