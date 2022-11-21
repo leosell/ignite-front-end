@@ -8,7 +8,6 @@ import { Context } from '../../Context/authContext'
 
 const Home = ({ navigation }) => {
     const { state, dispatch } = useContext(Context)
-
     return (
         <View>
             <View style={styles.container}>
