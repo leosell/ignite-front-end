@@ -36,17 +36,21 @@ const Estacionamentos = ({ navigation }) => {
                 <></>
             )}
 
-            <View>
+            <View style={styles.view2}>
                 <FlatList
                 data={estacionamento}
                 renderItem={({ item }) => {return (
                     <View style={styles.container}>
-                        <Text>
-                            { item.nome }
+                        <Text style={styles.text}>
+                            <Text style={styles.text2}>Estacionamento: </Text>{ item.nome }
                         </Text>
                         
-                        <Text>
-                            { item.cnpj }
+                        <Text style={styles.text}>
+                            <Text style={styles.text2}>Endereço: </Text>{ item.endereco }, { item.numero }
+                        </Text>
+                        
+                        <Text style={styles.text}>
+                            <Text style={styles.text2}>Bairro: </Text>{ item.bairro }
                         </Text>
 
                         {state.isAdmin ? (
@@ -63,6 +67,7 @@ const Estacionamentos = ({ navigation }) => {
                         )}
                     </View>
                 )}}
+                style={styles.list}
                 keyExtractor={(item) => item.id}
                 />
             </View>
@@ -75,17 +80,29 @@ export default Estacionamentos
 const styles = StyleSheet.create({
     view: {
         flex: 1,
-        flexDirection: 'column'
+        flexDirection: 'column',
+        padding: 5
+    },
+
+    view2: {
+        padding: 10,
     },
 
     container: {
         width: '100%',
-        height: '10vh',
-        backgroundColor: '#FFBA52'
+        height: '15vh',
+        backgroundColor: '#FFBA52',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    list: {
+        padding: 5,
     },
 
     containerBotao: {
-        width: '20%'
+        width: '20%',
+        paddingVertical: 15
     },
 
     botao: {
@@ -95,5 +112,15 @@ const styles = StyleSheet.create({
     botaoNovo: {
         justifyContent: 'center',
         alignItems: 'center',
+    },
+
+    text: {
+        fontSize: 16,
+        
+    },
+    
+    text2: {
+        fontWeight: 800,
+
     }
 })
