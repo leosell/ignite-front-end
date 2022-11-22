@@ -1,15 +1,16 @@
-import { Text, Pressable, StyleSheet, View, TextInput, TouchableOpacity  } from 'react-native'
+import { Text, Pressable, StyleSheet, View, Image, TouchableOpacity } from 'react-native'
 import React, { useContext } from 'react'
-import { FontAwesome, AntDesign, Ionicons} from '@expo/vector-icons'
-import CustomButton from '../../Components/CustomButton'
-
+import { FontAwesome, AntDesign, Ionicons } from '@expo/vector-icons'
 import { Context } from '../../Context/authContext'
+import map from './map.png'
+
 
 const Home = ({ navigation }) => {
     const { state, dispatch } = useContext(Context)
 
     return (
-        <View>
+
+        <View style={styles.tela}>
             <View style={styles.cabecalho}>
                 <Pressable
                     onPress={() => alert('perfil')}
@@ -58,17 +59,23 @@ const Home = ({ navigation }) => {
             </View>
 
             <View style={styles.div}>
-                <TouchableOpacity 
+                <TouchableOpacity
                     style={styles.botaoCartao}>
                     <Ionicons
                         name='md-card'
                         size={25}
                         color='black'
+                        style={{marginLeft: '15px'}}
                     />
-                    Meus Cartões
+                    <Text style={styles.textoConta}>Meus cartões</Text>
                 </TouchableOpacity>
+                <Image 
+                    source={require('./map.png')}
+                    style = {styles.imagemMapa}
+                />
             </View>
         </View>
+
     )
 }
 
@@ -76,9 +83,11 @@ export default Home
 
 const styles = StyleSheet.create({
 
-
+    tela: {
+        flex: '1',
+        backgroundColor: '#FFF'
+    },
     cabecalho: {
-        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
         backgroundColor: '#FFBA52',
@@ -131,16 +140,16 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
 
-    setaIcone:{
+    setaIcone: {
         marginTop: '5px'
     },
 
-    div:{
+    div: {
         justifyContent: 'center',
         alignItems: 'center',
     },
-    
-    botaoCartao:{
+
+    botaoCartao: {
         width: '70%',
         height: '50px',
         borderRadius: '10px',
@@ -148,8 +157,17 @@ const styles = StyleSheet.create({
         fontWeight: 'bolder',
         textAlign: 'center',
         gap: '20px',
-        fontSize: '16px',
+        fontSize: '20px',
         flexDirection: 'row',
-        alignItems:'center'
+        alignItems: 'center',
+        border: '1px outset black'
+    },
+    imagemMapa:{
+        width: 300, 
+        height: 300,
+        marginTop: '20px',
+        borderRadius: '10px'
+
+
     },
 })
