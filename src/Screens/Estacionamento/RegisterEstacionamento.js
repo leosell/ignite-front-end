@@ -124,12 +124,6 @@ const RegisterEstacionamento = ({ navigation }) => {
                 <Picker.Item label="24h" value="24h" />
             </Picker>
 
-            {/* <CustomInput
-                placeholder='Funcionamento'
-                value={funcionamento}
-                setValue={setFuncionamento}
-            /> */}
-
             <CustomButton
                 text='Cadastrar'
                 onPress={onRegisterPressed}
@@ -144,7 +138,8 @@ const styles = StyleSheet.create({
     funcionamento: {
         width: '100%',
         height: 46,
-        marginVertical: 5
+        marginVertical: 5,
+        
     },
 
     hora: {
