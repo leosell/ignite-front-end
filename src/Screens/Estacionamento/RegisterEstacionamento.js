@@ -1,4 +1,4 @@
-import { Picker, StyleSheet, Text, useWindowDimensions, View } from 'react-native'
+import { Picker, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View } from 'react-native'
 import React, { useContext, useState } from 'react'
 
 import CustomButton from '../../Components/CustomButton'
@@ -55,79 +55,88 @@ const RegisterEstacionamento = ({ navigation }) => {
         }
     }
     return (
-        <View style={styles.view}>
-            <CustomInput 
-                placeholder='Nome Estabelezimento'
-                value={nome}
-                setValue={setNome}
-            />
+        <View>
+            <View style={styles.textoRegistro}>
+                <Text style={styles.texto}>Registro de Estacionamento</Text>
+            </View>
 
-            <CustomInput
-                placeholder='CNPJ'
-                value={cnpj}
-                setValue={setCnpj}
-            />
-            
-            <CustomInput
-                placeholder='Endereço'
-                value={endereco}
-                setValue={setEndereco}
-            />
-            
-            <CustomInput
-                placeholder='Número'
-                value={numero}
-                setValue={setNumero}
-            />
-            
-            <CustomInput
-                placeholder='Bairro'
-                value={bairro}
-                setValue={setBairro}
-            />
-            
-            <CustomInput
-                placeholder='Cidade'
-                value={cidade}
-                setValue={setCidade}
-            />
-            
-            <CustomInput
-                placeholder='Estado'
-                value={estado}
-                setValue={setEstado}
-            />
+            <View style={styles.view}>
+                <CustomInput 
+                    placeholder='Nome Estabelezimento'
+                    value={nome}
+                    setValue={setNome}
+                />
 
-            <Picker
-                selectedValue={funcionamento}
-                onValueChange={setFuncionamento}
-                style={styles.funcionamento}
-            >
-                <Picker.Item label="Dia de Funcionamento" value="0" />
-                <Picker.Item label="Seg. Sex." value="Seg. Sex." />
-                <Picker.Item label="Seg. Sab." value="Seg. Sab." />
-                <Picker.Item label="Seg. Dom." value="Seg. Dom." />
-            </Picker>
+                <CustomInput
+                    placeholder='CNPJ'
+                    value={cnpj}
+                    setValue={setCnpj}
+                />
+                
+                <CustomInput
+                    placeholder='Endereço'
+                    value={endereco}
+                    setValue={setEndereco}
+                />
+                
+                <CustomInput
+                    placeholder='Número'
+                    value={numero}
+                    setValue={setNumero}
+                />
+                
+                <CustomInput
+                    placeholder='Bairro'
+                    value={bairro}
+                    setValue={setBairro}
+                />
+                
+                <CustomInput
+                    placeholder='Cidade'
+                    value={cidade}
+                    setValue={setCidade}
+                />
+                
+                <CustomInput
+                    placeholder='Estado'
+                    value={estado}
+                    setValue={setEstado}
+                />
+
+                <Picker
+                    selectedValue={funcionamento}
+                    onValueChange={setFuncionamento}
+                    style={styles.funcionamento}
+                >
+                    <Picker.Item label="Dia de Funcionamento" value="0" />
+                    <Picker.Item label="Seg. Sex." value="Seg. Sex." />
+                    <Picker.Item label="Seg. Sab." value="Seg. Sab." />
+                    <Picker.Item label="Seg. Dom." value="Seg. Dom." />
+                </Picker>
 
 
-            <Picker
-                selectedValue={horaFuncionamento}
-                onValueChange={setHoraFuncionamento}
-                style={styles.hora}
-            >
-                <Picker.Item label="Horario de Funcionamento" value="0" />
-                <Picker.Item label="08h às 18h" value="08h às 18h" />
-                <Picker.Item label="08h às 19h" value="08h às 19h" />
-                <Picker.Item label="08h às 20h" value="08h às 20h" />
-                <Picker.Item label="08h às 21h" value="08h às 21h" />
-                <Picker.Item label="08h às 22h" value="08h às 22h" />
-                <Picker.Item label="24h" value="24h" />
-            </Picker>
+                <Picker
+                    selectedValue={horaFuncionamento}
+                    onValueChange={setHoraFuncionamento}
+                    style={styles.hora}
+                >
+                    <Picker.Item label="Horario de Funcionamento" value="0" />
+                    <Picker.Item label="08h às 18h" value="08h às 18h" />
+                    <Picker.Item label="08h às 19h" value="08h às 19h" />
+                    <Picker.Item label="08h às 20h" value="08h às 20h" />
+                    <Picker.Item label="08h às 21h" value="08h às 21h" />
+                    <Picker.Item label="08h às 22h" value="08h às 22h" />
+                    <Picker.Item label="24h" value="24h" />
+                </Picker>
 
-            <CustomButton
-                text='Cadastrar'
-                onPress={onRegisterPressed}
-            />
+                <TouchableOpacity
+                    onPress={onRegisterPressed}
+                    style={styles.cadastrar}
+                >
+                    Cadastrar
+                </TouchableOpacity>
+            </View>
+
         </View>
     )
 }
@@ -135,15 +144,55 @@ const RegisterEstacionamento = ({ navigation }) => {
 export default RegisterEstacionamento
 
 const styles = StyleSheet.create({
+    textoRegistro: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: 40,
+    },
+
+    texto: {
+        fontSize: 32,
+    },
+
+    view: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
     funcionamento: {
-        width: '100%',
-        height: 46,
+        backgroundColor: '#FFF',
+        width: '85%',
         marginVertical: 5,
-        
+        borderRadius: 20,
+        border: 'none',
+        height: 46,
+        paddingHorizontal: 10,
+        fontWeight: 'bold',
+        fontSize: 14,
     },
 
     hora: {
-        width: '100%',
-        height: 46
+        backgroundColor: '#FFF',
+        width: '85%',
+        marginVertical: 5,
+        borderRadius: 20,
+        border: 'none',
+        height: 46,
+        paddingHorizontal: 10,
+        fontWeight: 'bold',
+        fontSize: 14,
+    },
+
+    cadastrar: {
+        backgroundColor: '#FFC978',
+        width: '85%',
+        marginVertical: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 20,
+        height: 46,
+        fontWeight: 'bold',
+
     }
 })
