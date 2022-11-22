@@ -1,60 +1,73 @@
-import { Text, Pressable, StyleSheet, View } from 'react-native'
+import { Text, Pressable, StyleSheet, View, TextInput, TouchableOpacity  } from 'react-native'
 import React, { useContext } from 'react'
-import { FontAwesome, AntDesign } from '@expo/vector-icons'
-
+import { FontAwesome, AntDesign, Ionicons} from '@expo/vector-icons'
 import CustomButton from '../../Components/CustomButton'
 
 import { Context } from '../../Context/authContext'
 
 const Home = ({ navigation }) => {
     const { state, dispatch } = useContext(Context)
+
     return (
         <View>
-            <View style={styles.container}>
-                <View style={styles.view}>
-                    <Pressable
-                        onPress={() => alert('perfil')}
-                        style={styles.perfil}
-                    >
-                        <FontAwesome
-                            name='user'
-                            size={30}
-                            color='#000'
-                            style={styles.icon}
-                        />
-                    </Pressable>
-
-                    <Text style={styles.text}>Olá, { state.name }</Text>
-
-                    <Pressable
-                        onPress={() => alert('config')}
-                        style={styles.config}
-                    >
-                        <FontAwesome
-                            name='gear'
-                            size={30}
-                            color='#000'
-                            style={styles.icon}
-                        />
-                    </Pressable>
-                    
-                    
-                </View>
-            </View>
-            
-            <View style={styles.conta}>
-                <Text>Conta</Text>
-                <Text>R$ { state.valor }</Text>
-            </View>
-                <Pressable>
-                    <AntDesign
-                        name='right'
+            <View style={styles.cabecalho}>
+                <Pressable
+                    onPress={() => alert('perfil')}
+                    style={styles.perfil}
+                >
+                    <FontAwesome
+                        name='user'
                         size={30}
-                        color='#FFC978'
+                        color='#000'
+                        style={styles.icon}
                     />
                 </Pressable>
 
-            
+                <Text style={styles.texto}>Olá, {state.name}</Text>
+
+                <Pressable
+                    onPress={() => alert('config')}
+                    style={styles.config}
+                >
+                    <FontAwesome
+                        name='gear'
+                        size={30}
+                        color='#000'
+                        style={styles.icon}
+                    />
+                </Pressable>
+            </View>
+
+            <View style={styles.conta}>
+                <View>
+                    <Text style={styles.textoConta}>Conta</Text>
+                    <Text style={styles.textoDinheiro}> R$ {state.valor}</Text>
+                </View>
+
+                <View>
+                    <Pressable>
+                        <AntDesign
+                            name='right'
+                            size={30}
+                            color='#FFBA52'
+                            style={styles.setaIcone}
+                        />
+                    </Pressable>
+                </View>
+
+            </View>
+
+            <View style={styles.div}>
+                <TouchableOpacity 
+                    style={styles.botaoCartao}>
+                    <Ionicons
+                        name='md-card'
+                        size={25}
+                        color='black'
+                    />
+                    Meus Cartões
+                </TouchableOpacity>
+            </View>
         </View>
     )
 }
@@ -62,19 +75,15 @@ const Home = ({ navigation }) => {
 export default Home
 
 const styles = StyleSheet.create({
-    container: {
-        margin: 'auto',
-        width: '100%',
-        height: '15vh'
-    },
 
-    view: {
+
+    cabecalho: {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
         backgroundColor: '#FFBA52',
         alignItems: 'center',
-        
+
     },
 
     perfil: {
@@ -102,15 +111,45 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
 
-    view_opcoes: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-around'
+    texto: {
+        fontWeight: 'bolder',
+        fontSize: '22px'
     },
 
-    config_opcoes: {
+    textoConta: {
+        fontSize: '22px'
+    },
+
+    textoDinheiro: {
+        fontSize: '22px',
+        padding: '5px'
+    },
+
+    conta: {
+        padding: '25px',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+
+    setaIcone:{
+        marginTop: '5px'
+    },
+
+    div:{
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    
+    botaoCartao:{
+        width: '70%',
+        height: '50px',
+        borderRadius: '10px',
         backgroundColor: '#FFC978',
-        borderRadius: 40,
-        width: 45
+        fontWeight: 'bolder',
+        textAlign: 'center',
+        gap: '20px',
+        fontSize: '16px',
+        flexDirection: 'row',
+        alignItems:'center'
     },
 })
