@@ -1,66 +1,79 @@
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Button } from 'react-native'
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Button, ScrollView } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
-import { Entypo, Feather } from '@expo/vector-icons'
 
 import api from '../../API'
 import { Context } from '../../Context/authContext'
 import CustomButton from '../../Components/CustomButton'
+import { Entypo } from '@expo/vector-icons'
 
 
 const Estacionamentos = ({ navigation }) => {
     const { state, dispatch } = useContext(Context)
-
+    const [update, setUpdate] = useState(false)
     const [ estacionamento, setEstacionamento ] = useState({})
 
     useEffect(() => {
         const screenLoad = async () => {
             const list = await api.get('/estacionamento/busca')
-            setEstacionamento(list.data.estacionamento)
-            dispatch({ type: 'update', payload: false })
+            setEstacionamento(list.data.estacionamento) 
         }
         screenLoad()
-    }, [state.update])
+    }, [update])
+
+    const deletarId = async (id) => {
+        console.log(id)
+        await api.delete(`/estacionamento/${id}`)
+        setUpdate(!update)
+    }
 
 
 
     return (
-        <View style={styles.view}>
-            { state.isAdmin ? (
-                <View style={styles.botaoNovo}>
-                    <CustomButton
-                        text='Novo Estacionamento'
-                        onPress={() => navigation.navigate('RegisterEstacionamento')}
-                    />
-                </View>
-            ) : (
-                <></>
-            )}
+        <View>
+            <View style={styles.view}>
+                { state.isAdmin ? (
+                    <View style={styles.botaoNovo}>
+                        <CustomButton
+                            text='Novo Estacionamento'
+                            onPress={() => navigation.navigate('RegisterEstacionamento')}
+                        />
+                    </View>
+                ) : (
+                    <></>
+                )}
+            </View>
 
-            <View style={styles.view2}>
+            <ScrollView style={styles.view2}>
                 <FlatList
                 data={estacionamento}
                 renderItem={({ item }) => {return (
                     <View style={styles.container}>
-                        <Text style={styles.text}>
-                            <Text style={styles.text2}>Estacionamento: </Text>{ item.nome }
-                        </Text>
-                        
-                        <Text style={styles.text}>
-                            <Text style={styles.text2}>Endereço: </Text>{ item.endereco }, { item.numero }
-                        </Text>
-                        
-                        <Text style={styles.text}>
-                            <Text style={styles.text2}>Bairro: </Text>{ item.bairro }
-                        </Text>
+                        <View>
+                            <Text style={styles.text}>
+                                <Text style={styles.text2}>Estacionamento: </Text>{ item.nome }
+                            </Text>
+                            
+                            <Text style={styles.text}>
+                                <Text style={styles.text2}>Endereço: </Text>{ item.endereco }, { item.numero }
+                            </Text>
+                            
+                            <Text style={styles.text}>
+                                <Text style={styles.text2}>Bairro: </Text>{ item.bairro }
+                            </Text>
+                        </View>
 
                         {state.isAdmin ? (
                             <View style={styles.containerBotao}>
-                                <Button
-                                    onPress={() => alert('exluido')}
-                                    title='Excluir'
-                                    color='#000'
+                                <TouchableOpacity
+                                    onPress={() => deletarId(item.id)}
                                     style={styles.botao}
-                                />
+                                >
+                                    <Entypo
+                                        name='trash'
+                                        size={30}
+                                        color='#000'
+                                    />
+                                </TouchableOpacity>
                             </View>
                         ) : (
                             <></>
@@ -70,7 +83,7 @@ const Estacionamentos = ({ navigation }) => {
                 style={styles.list}
                 keyExtractor={(item) => item.id}
                 />
-            </View>
+            </ScrollView>
         </View>
     )
 }
@@ -92,8 +105,11 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '15vh',
         backgroundColor: '#FFBA52',
-        justifyContent: 'center',
-        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        alignItems:'center',
+        marginVertical: 10,
+        borderRadius: 10,
     },
 
     list: {
@@ -102,11 +118,17 @@ const styles = StyleSheet.create({
 
     containerBotao: {
         width: '20%',
-        paddingVertical: 15
+        paddingVertical: 15,
     },
 
     botao: {
-        borderRadius: 20
+        boder: 'none',
+        borderRadius: 20,
+        backgroundColor: '#FFC978',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '60px',
+        height: '50px'
     },
 
     botaoNovo: {
@@ -116,11 +138,9 @@ const styles = StyleSheet.create({
 
     text: {
         fontSize: 16,
-        
     },
     
     text2: {
         fontWeight: 800,
-
     }
 })
