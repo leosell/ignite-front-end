@@ -2,7 +2,7 @@ import { Text, Pressable, StyleSheet, View, Image, TouchableOpacity } from 'reac
 import React, { useContext } from 'react'
 import { FontAwesome, AntDesign, Ionicons } from '@expo/vector-icons'
 import { Context } from '../../Context/authContext'
-import map from './map.png'
+import Map from '../../../assets/images/Map.png'
 
 
 const Home = ({ navigation }) => {
@@ -65,13 +65,13 @@ const Home = ({ navigation }) => {
                         name='md-card'
                         size={25}
                         color='black'
-                        style={{marginLeft: '15px'}}
+                        style={{ marginLeft: '15px' }}
                     />
                     <Text style={styles.textoConta}>Meus cartões</Text>
                 </TouchableOpacity>
-                <Image 
-                    source={require('./map.png')}
-                    style = {styles.imagemMapa}
+                <Image
+                    source={Map}
+                    style={styles.imagemMapa}
                 />
             </View>
         </View>
@@ -162,12 +162,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         border: '1px outset black'
     },
-    imagemMapa:{
-        width: 300, 
-        height: 300,
+    imagemMapa: {
+        width: 400,
+        height: 350,
         marginTop: '20px',
-        borderRadius: '10px'
-
-
+        borderRadius: '10px',
+        // border: '1px solid black'
+        shadowColor: "black",
+        shadowOffset: {
+            width: 10,
+            height: 30,
+        },
+        shadowOpacity: 1,
+        // shadowRadius: 4.65,
+        // elevation: 6,
     },
 })
