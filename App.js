@@ -17,7 +17,7 @@ const Stack = createNativeStackNavigator()
 const App = () => {
     const { state } = useContext(Context)
     return (
-        <NativeBaseProvider theme={theme}>
+        <NativeBaseProvider>
             <NavigationContainer>
                 <Stack.Navigator screenOptions={{ headerShown: false }}>
                     {state.Loading ? (

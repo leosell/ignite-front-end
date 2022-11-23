@@ -42,7 +42,7 @@ const Home = ({ navigation }) => {
             <View style={styles.conta}>
                 <View>
                     <Text style={styles.textoConta}>Conta</Text>
-                    <Text style={styles.textoDinheiro}> R$ {state.valor}</Text>
+                    <Text style={styles.textoDinheiro}>R$ {state.valor}</Text>
                 </View>
 
                 <View>

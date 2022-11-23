@@ -42,7 +42,7 @@ const RegisterCarteira = () => {
                     </Pressable>
                     <View>
                         <Text style={styles.textoConta}>Saldo Disponível</Text>
-                        <Text style={styles.textoDinheiro}> R$ {state.valor}</Text>
+                        <Text style={styles.textoDinheiro}>R$ {state.valor}</Text>
                     </View>
                 </View>
 
@@ -52,8 +52,6 @@ const RegisterCarteira = () => {
                         <Pressable style={styles.botao} onPress={() => alert('Em breve...')}>
                             <MaterialIcons name="attach-money" size={30} color="black" />
                         </Pressable>
-
-
                         <Text style={styles.textoBotao}>Cashback</Text>
                     </View>
                     <View style={styles.botao1}>
@@ -88,7 +86,8 @@ export default RegisterCarteira
 const styles = StyleSheet.create({
 
     box:{
-        backgroundColor: '#FFF'
+        backgroundColor: '#FFF',
+        flex: 1
     },
     containerGeral: {
         // backgroundColor: '#FFF'
