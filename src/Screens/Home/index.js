@@ -66,7 +66,7 @@ const Home = ({ navigation }) => {
                         size={25}
                         color='black'
                         style={{ marginLeft: '15px' }}
-                    />
+                        />
                     <Text style={styles.textoConta}>Meus cartões</Text>
                 </TouchableOpacity>
                 <Image
