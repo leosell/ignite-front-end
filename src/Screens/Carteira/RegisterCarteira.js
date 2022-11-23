@@ -1,5 +1,6 @@
-import { StyleSheet, Text, useWindowDimensions, View } from 'react-native'
+import { Text, Pressable, StyleSheet, View, Image, TouchableOpacity } from 'react-native'
 import React, { useContext, useState } from 'react'
+import { FontAwesome, AntDesign, Ionicons } from '@expo/vector-icons'
 
 import api from '../../API'
 import { Context } from '../../Context/authContext'
@@ -11,8 +12,6 @@ const RegisterCarteira = () => {
     const { state, dispatch } = useContext(Context)
 
     const [ saldo, setSaldo ] = useState('')
-
-    const { height } = useWindowDimensions()
 
     const onRegisterPressed = async () => {
         try {
@@ -31,11 +30,52 @@ const RegisterCarteira = () => {
 
   return (
     <View>
-      <Text>RegisterCarteira</Text>
+      <View style={styles.conta}>
+                <View>
+                    <Text style={styles.textoConta}>Conta</Text>
+                    <Text style={styles.textoDinheiro}> R$ {state.valor}</Text>
+                </View>
+
+                <View>
+                    <Pressable>
+                        <AntDesign
+                            name='right'
+                            size={30}
+                            color='#FFBA52'
+                            style={styles.setaIcone}
+                        />
+                    </Pressable>
+                </View>
+
+            </View>
     </View>
   )
 }
 
 export default RegisterCarteira
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  texto: {
+    fontWeight: 'bolder',
+    fontSize: '22px'
+},
+
+textoConta: {
+    fontSize: '22px'
+},
+
+textoDinheiro: {
+    fontSize: '22px',
+    padding: '5px'
+},
+
+conta: {
+    padding: '25px',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+},
+
+setaIcone: {
+    marginTop: '5px'
+},
+})
