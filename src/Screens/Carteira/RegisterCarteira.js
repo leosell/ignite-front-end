@@ -1,9 +1,9 @@
 import { Text, Pressable, StyleSheet, View, Image, TouchableOpacity } from 'react-native'
 import React, { useContext, useState } from 'react'
-import { FontAwesome, AntDesign, Ionicons, MaterialIcons, Entypo, FontAwesome5, } from '@expo/vector-icons'
+import { FontAwesome, AntDesign, Ionicons, MaterialIcons, Entypo, FontAwesome5, SimpleLineIcons } from '@expo/vector-icons'
 import api from '../../API'
 import { Context } from '../../Context/authContext'
-import { Box, Input, extendTheme } from 'native-base'
+import { Box, Input, extendTheme, Center } from 'native-base'
 
 
 
@@ -28,18 +28,24 @@ const RegisterCarteira = () => {
     }
 
     return (
-        
+
         <Box style={styles.box}>
             <View style={styles.containerGeral}>
                 <View style={styles.conta}>
-                    <Pressable>
-                        <AntDesign
-                            name='left'
-                            size={30}
-                            color='#FFBA52'
-                            style={styles.setaIcone}
-                        />
-                    </Pressable>
+                    <View style={{flexDirection: 'row', gap: '370px'}}>
+                        <Pressable>
+                            <AntDesign
+                                name='left'
+                                size={30}
+                                color='#FFBA52'
+                                style={styles.setaIcone}
+                            />
+                        </Pressable>
+
+                        <Pressable>
+                            <SimpleLineIcons style={{marginTop: '10px'}} name="wallet" size={24} color="black" />
+                        </Pressable>
+                    </View>
                     <View>
                         <Text style={styles.textoConta}>Saldo Disponível</Text>
                         <Text style={styles.textoDinheiro}>R$ {state.valor}</Text>
@@ -73,8 +79,33 @@ const RegisterCarteira = () => {
                         <Text style={styles.textoBotao}>Convidar</Text>
                     </View>
                 </View>
+                <Text style={{ padding: '15px', fontWeight: '600' }}>Histórico</Text>
                 <Box>
-                    <Input />
+                    <Center>
+                        <Input
+                            variant="rounded"
+                            mx='1' w='95%'
+                            placeholder='Buscar'
+                            backgroundColor='#FFC978'
+                            color='black'
+                            placeholderTextColor='black'
+                        />
+                    </Center>
+
+                </Box>
+
+                <Box>
+                    <View style={{ flexDirection: 'row', padding: '20px', justifyContent: 'center', alignContent: 'center', alignItems: 'center' }}>
+                        <Ionicons name="add-circle-outline" size={44} color="black" />
+                        <Box>
+                            <Box style={{ flexDirection: 'row', gap: '250px' }}>
+                                <Text style={{ fontSize: '14px', fontWeight: '600' }}>Crédito Adicionado</Text>
+                                <Text style={{ color: 'gray' }}>{state.dataExtrato}Hoje</Text>
+                            </Box>
+                            <Text style={{ color: 'gray' }}>Cartão de crédito</Text>
+                            <Text style={{ color: 'gray' }}>R${state.valor}</Text>
+                        </Box>
+                    </View>
                 </Box>
             </View>
         </Box>
@@ -85,7 +116,7 @@ export default RegisterCarteira
 
 const styles = StyleSheet.create({
 
-    box:{
+    box: {
         backgroundColor: '#FFF',
         flex: 1
     },
@@ -140,5 +171,8 @@ const styles = StyleSheet.create({
     textoBotao: {
         fontWeight: 600
     },
+    Inputs: {
+        width: '50%'
+    }
 
 })

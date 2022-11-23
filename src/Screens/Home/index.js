@@ -1,6 +1,6 @@
 import { Text, Pressable, StyleSheet, View, Image, TouchableOpacity } from 'react-native'
 import React, { useContext } from 'react'
-import { FontAwesome, AntDesign, Ionicons } from '@expo/vector-icons'
+import { FontAwesome, AntDesign, Ionicons} from '@expo/vector-icons'
 import { Context } from '../../Context/authContext'
 import Map from '../../../assets/images/Map.png'
 
