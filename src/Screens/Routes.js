@@ -8,23 +8,14 @@ import { Context } from '../Context/authContext'
 import Home from './Home'
 import EstacionamentoRoutes from './Estacionamento/EstacionamentoRoutes'
 import RegisterCarteira from './Carteira/RegisterCarteira'
+import Login from './Login'
 
 const Tab = createBottomTabNavigator();
 
 const Routes = ({ navigation }) => {
     const { state, dispatch } = useContext(Context)
     return (
-        <Tab.Navigator screenOptions={{
-            headerRight: () => (
-                <Entypo
-                    name='log-out'
-                    size={20}
-                    style={{ margin: 10 }}
-                    onPress={() => dispatch({ type: 'logOut' })}
-                    color="#000"
-                />
-            )            
-        }} >
+        <Tab.Navigator screenOptions={{ headerShown: false }}>
             <Tab.Screen
                 name="Home"
                 component={Home}
@@ -50,6 +41,22 @@ const Routes = ({ navigation }) => {
                 options={{
                     tabBarIcon: () => (
                         <AntDesign name='wallet' size={30} />
+                    )
+                }}
+            />
+
+            <Tab.Screen
+                name="Sair"
+                component={Login}
+                options={{
+                    tabBarIcon: () => (
+                        <Entypo
+                            name='log-out'
+                            size={20}
+                            style={{ margin: 10 }}
+                            onPress={() => dispatch({ type: 'logOut' })}
+                            color="#000"
+                        />
                     )
                 }}
             />

@@ -22,7 +22,8 @@ const reducer = (state, action) => {
             return { 
                 ...state, 
                 isLogged: false,
-                isAdmin: false
+                isAdmin: false,
+                Loading: false
             }
         case "verify":
             return { 
