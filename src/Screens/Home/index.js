@@ -1,6 +1,7 @@
 import { Text, Pressable, StyleSheet, View, Image, TouchableOpacity, Modal } from 'react-native'
 import React, { useContext, useState } from 'react'
 import { FontAwesome, AntDesign, Ionicons } from '@expo/vector-icons'
+import { Input } from 'native-base'
 
 import { Context } from '../../Context/authContext'
 
@@ -97,7 +98,10 @@ const Home = ({ navigation }) => {
                     <View style={styles.centeredView}>
                         <View style={styles.modalView}>
                             <Text>Perfil</Text>
-                            <Text>Nome: { state.name }</Text>
+                            <Input
+                                placeholder={state.name}
+                                
+                            />
                             <Pressable
                                 onPress={() => setModalVisible(false)}
                             >
@@ -231,6 +235,8 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
-        elevation: 5
+        elevation: 5,
+        width: '70%',
+        height: '50%'
     },
 })
