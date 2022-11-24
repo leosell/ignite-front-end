@@ -16,6 +16,7 @@ const Routes = ({ navigation }) => {
     const { state, dispatch } = useContext(Context)
     return (
         <Tab.Navigator screenOptions={{ headerShown: false }}>
+
             <Tab.Screen
                 name="Home"
                 component={Home}
@@ -34,7 +35,7 @@ const Routes = ({ navigation }) => {
                     )
                 }}
             />
-            
+
             <Tab.Screen
                 name="Carteira"
                 component={RegisterCarteira}
