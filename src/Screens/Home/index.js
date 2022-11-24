@@ -1,19 +1,25 @@
-import { Text, Pressable, StyleSheet, View, Image, TouchableOpacity } from 'react-native'
-import React, { useContext } from 'react'
-import { FontAwesome, AntDesign, Ionicons} from '@expo/vector-icons'
+import { Text, Pressable, StyleSheet, View, Image, TouchableOpacity, Modal } from 'react-native'
+import React, { useContext, useState } from 'react'
+import { FontAwesome, AntDesign, Ionicons } from '@expo/vector-icons'
+
 import { Context } from '../../Context/authContext'
+
 import Map from '../../../assets/images/Map.png'
+
+import Carteira from '../Carteira/Carteira'
 
 
 const Home = ({ navigation }) => {
     const { state, dispatch } = useContext(Context)
+
+    const { modalVisible, setModalVisible } = useState(false)
 
     return (
 
         <View style={styles.tela}>
             <View style={styles.cabecalho}>
                 <Pressable
-                    onPress={() => alert('perfil')}
+                    onPress={() => setModalVisible(true)}
                     style={styles.perfil}
                 >
                     <FontAwesome
@@ -52,6 +58,7 @@ const Home = ({ navigation }) => {
                             size={30}
                             color='#FFBA52'
                             style={styles.setaIcone}
+                            onPress={() => navigation.navigate('Carteira')}
                         />
                     </Pressable>
                 </View>
@@ -69,10 +76,36 @@ const Home = ({ navigation }) => {
                         />
                     <Text style={styles.textoConta}>Meus cartões</Text>
                 </TouchableOpacity>
+                
                 <Image
                     source={Map}
                     style={styles.imagemMapa}
                 />
+                
+            </View>
+
+            <View style={styles.centeredView}>
+                <Modal
+                    animationType='slide'
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        Alert.alert('Modal has been closed')
+                        setModalVisible(!modalVisible)
+                    }}
+                >
+                    <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <Text>Perfil</Text>
+                            <Pressable
+                                style={[styles.button, styles.buttonClose]}
+                                onPress={() => setModalVisible(!modalVisible)}
+                            >
+                                <Text style={styles.textStyle}>Hide Modal</Text>
+                            </Pressable>
+                        </View>
+                    </View>
+                </Modal>
             </View>
         </View>
 
@@ -82,11 +115,11 @@ const Home = ({ navigation }) => {
 export default Home
 
 const styles = StyleSheet.create({
-
     tela: {
         flex: '1',
         backgroundColor: '#FFF'
     },
+
     cabecalho: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -176,5 +209,28 @@ const styles = StyleSheet.create({
         shadowOpacity: 1,
         // shadowRadius: 4.65,
         // elevation: 6,
+    },
+
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22
+    },
+
+    modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
     },
 })

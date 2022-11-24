@@ -15,7 +15,8 @@ const Tab = createBottomTabNavigator();
 const Routes = ({ navigation }) => {
     const { state, dispatch } = useContext(Context)
     return (
-        <Tab.Navigator screenOptions={{ headerShow: false }}>
+        <Tab.Navigator screenOptions={{ headerShown: false }}>
+
             <Tab.Screen
                 name="Home"
                 component={Home}
@@ -44,8 +45,9 @@ const Routes = ({ navigation }) => {
                     )
                 }}
             />
+
             <Tab.Screen
-                name='Sair'
+                name="Sair"
                 component={Login}
                 options={{
                     tabBarIcon: () => (
@@ -59,6 +61,7 @@ const Routes = ({ navigation }) => {
                     )
                 }}
             />
+
             {/* {state.isAdmin ? (
                 <Tab.Screen
                     name="Users"
