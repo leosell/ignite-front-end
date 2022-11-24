@@ -12,7 +12,7 @@ import Carteira from '../Carteira/Carteira'
 const Home = ({ navigation }) => {
     const { state, dispatch } = useContext(Context)
 
-    const { modalVisible, setModalVisible } = useState(false)
+    const [ modalVisible, setModalVisible ] = useState(false)
 
     return (
 
@@ -91,17 +91,17 @@ const Home = ({ navigation }) => {
                     visible={modalVisible}
                     onRequestClose={() => {
                         Alert.alert('Modal has been closed')
-                        setModalVisible(!modalVisible)
+                        setModalVisible(false)
                     }}
                 >
                     <View style={styles.centeredView}>
                         <View style={styles.modalView}>
                             <Text>Perfil</Text>
+                            <Text>Nome: { state.name }</Text>
                             <Pressable
-                                style={[styles.button, styles.buttonClose]}
-                                onPress={() => setModalVisible(!modalVisible)}
+                                onPress={() => setModalVisible(false)}
                             >
-                                <Text style={styles.textStyle}>Hide Modal</Text>
+                                <Text>Fechar</Text>
                             </Pressable>
                         </View>
                     </View>
