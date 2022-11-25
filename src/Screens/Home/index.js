@@ -154,17 +154,17 @@ const styles = StyleSheet.create({
     },
 
     texto: {
-        fontWeight: 'bolder',
+        fontWeight: 'bold',
         fontSize: '22px'
     },
 
     textoConta: {
-        fontSize: '22px'
+        fontSize: '18px'
     },
 
     textoDinheiro: {
-        fontSize: '22px',
-        padding: '5px'
+        fontSize: '18px',
+        padding: '1px'
     },
 
     conta: {
@@ -193,22 +193,22 @@ const styles = StyleSheet.create({
         fontSize: '20px',
         flexDirection: 'row',
         alignItems: 'center',
-        border: '1px outset black'
+        border: '1px outset #000',
+        marginTop: '20px'
     },
+
     imagemMapa: {
-        width: 400,
-        height: 350,
-        marginTop: '20px',
+        width: 450,
+        height: 550,
+        marginTop: '40px',
         borderRadius: '10px',
-        // border: '1px solid black'
+        border: '1px solid black',
         shadowColor: "black",
         shadowOffset: {
             width: 10,
             height: 30,
         },
         shadowOpacity: 1,
-        // shadowRadius: 4.65,
-        // elevation: 6,
     },
 
     centeredView: {
