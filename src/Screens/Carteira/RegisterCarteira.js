@@ -1,9 +1,10 @@
-import { Text, Pressable, StyleSheet, View, Image, TouchableOpacity } from 'react-native'
+import { Text, Pressable, StyleSheet, View, Image, TouchableOpacity, Modal } from 'react-native'
 import React, { useContext, useState } from 'react'
 import { FontAwesome, AntDesign, Ionicons, MaterialIcons, Entypo, FontAwesome5, SimpleLineIcons } from '@expo/vector-icons'
 import api from '../../API'
 import { Context } from '../../Context/authContext'
-import { Box, Input, extendTheme, Center } from 'native-base'
+import { Box, Input, Center, Button } from 'native-base'
+import { BlurView } from 'expo-blur';
 
 
 
@@ -11,6 +12,7 @@ const RegisterCarteira = () => {
     const { state, dispatch } = useContext(Context)
 
     const [saldo, setSaldo] = useState('')
+    const [modalVisible, setModalVisible] = useState(false)
 
     const onRegisterPressed = async () => {
         try {
@@ -28,11 +30,11 @@ const RegisterCarteira = () => {
     }
 
     return (
-        
+
         <Box style={styles.box}>
             <View style={styles.containerGeral}>
                 <View style={styles.conta}>
-                    <View style={{flexDirection: 'row', gap: '370px'}}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                         <Pressable>
                             <AntDesign
                                 name='left'
@@ -42,8 +44,8 @@ const RegisterCarteira = () => {
                             />
                         </Pressable>
 
-                        <Pressable>
-                            <SimpleLineIcons style={{marginTop: '10px'}} name="wallet" size={24} color="black" />
+                        <Pressable onPress={() => setModalVisible(true)}>
+                            <SimpleLineIcons style={{ marginTop: '10px' }} name="wallet" size={24} color="black" />
                         </Pressable>
                     </View>
                     <View>
@@ -108,7 +110,38 @@ const RegisterCarteira = () => {
 
                 </Box>
             </View>
-        </Box>
+
+            <View style={styles.centeredView}>
+                <Modal
+                    animationType='slide'
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        Alert.alert('Modal has been closed')
+                        setModalVisible(false)
+                    }}
+                >
+                    <Center>
+                        <BlurView intensity={30} tint='light'>
+                            <Center height={200} width={{ base: 500, lg: 550 }} style={styles.editModal}>
+                                <Box>
+                                    <Center>
+                                        {/* <Text style={{}}>Adicionar</Text> */}
+                                        <Text style={{ fontWeight: '400', marginBottom: '25px', fontSize: '24px' }}>Adicionar</Text>
+                                        <Input variant="underlined" placeholder='R$: 0.00' type='' />
+                                        <Button size='sm' onPress={() => setModalVisible(false)} style={styles.botaoSaldo}>
+                                            <Text style={{ fontSize: '16px' }}>Inserir Saldo</Text>
+                                        </Button>
+                                    </Center>
+                                </Box>
+                            </Center>
+                        </BlurView>
+
+                    </Center>
+
+                </Modal>
+            </View >
+        </Box >
     )
 }
 
@@ -116,7 +149,7 @@ export default RegisterCarteira
 
 const styles = StyleSheet.create({
 
-    box:{
+    box: {
         backgroundColor: '#FFF',
         flex: 1
     },
@@ -171,5 +204,20 @@ const styles = StyleSheet.create({
     textoBotao: {
         fontWeight: 600
     },
+    editModal: {
+        backgroundColor: '#FFFC',
+        fontWeight: '400',
+        marginTop: '50%',
+        borderRadius: '20px',
+        color: 'white',
 
+        // color='white' bg='gray.100' fontWeight={400} marginTop={'50%'}
+    },
+    botaoSaldo: {
+        backgroundColor: '#FFC978',
+        borderRadius: '5px',
+        marginTop: '10px',
+        textAlign: 'center',
+        fontWeight: '600'
+    }
 })
