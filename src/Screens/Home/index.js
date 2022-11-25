@@ -1,7 +1,6 @@
-import { Text, Pressable, StyleSheet, View, Image, TouchableOpacity, Modal } from 'react-native'
+import { Text, Pressable, StyleSheet, View, Image, TouchableOpacity, Modal, TextInput } from 'react-native'
 import React, { useContext, useState } from 'react'
 import { FontAwesome, AntDesign, Ionicons } from '@expo/vector-icons'
-import { Input } from 'native-base'
 
 import { Context } from '../../Context/authContext'
 
@@ -98,10 +97,7 @@ const Home = ({ navigation }) => {
                     <View style={styles.centeredView}>
                         <View style={styles.modalView}>
                             <Text>Perfil</Text>
-                            <Input
-                                placeholder={state.name}
-                                
-                            />
+                
                             <Pressable
                                 onPress={() => setModalVisible(false)}
                             >
