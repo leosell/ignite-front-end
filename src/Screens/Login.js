@@ -1,17 +1,13 @@
-import { StyleSheet, TouchableOpacity, View, Image, useWindowDimensions, Text, TextInput } from "react-native";
+import { StyleSheet, View, Image, Text, TextInput, Pressable } from "react-native";
 import React, { useState, useContext } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
+import { Box, Button, Center } from 'native-base'
 
 import api from '../API';
 import { Context } from '../Context/authContext';
 
-import CustomButton from "../Components/CustomButton";
-import CustomInput from "../Components/CustomInput";
-
 import Logo from "../../assets/images/Logo.png";
-
-import RegisterEstacionamento from "./Estacionamento/RegisterEstacionamento";
 
 const Login = ({ navigation }) => {
     const { dispatch } = useContext(Context);
@@ -37,67 +33,158 @@ const Login = ({ navigation }) => {
         }
     }
 
-    const { height } = useWindowDimensions();
+    const desenvolvimento = () => {
+        alert('Em desenvolvimento...')
+    }
 
     return (
-        <View style={styles.view}>
-            <Image
-                source={Logo}
-                style={[styles.logo, { height: height * 0.3 }]}
-                resizeMode="contain"
-            />
+        <View style={styles.containerGeral}>
+            <Center>
+                <Box style={styles.topo}>
+                    <Image
+                        source={Logo}
+                        style={[styles.image,]}
+                        resizeMode='contain'
+                    />
+                    <Text style={styles.loginImage}>Entre e faça seu login!</Text>
+                </Box>
 
-            <CustomInput
-                placeholder="Email"
-                value={email}
-                setValue={setEmail}
-            />
+                <Box style={styles.inputs}>
+                    <Box style={styles.inputsSeparado}>
+                        <TextInput
+                            placeholder='Usuário'
+                            value={email}
+                            onChangeText={setEmail}
+                            style={styles.caixaInputs}
+                        />
+                    </Box>
 
-            <CustomInput
-                placeholder="Password"
-                value={password}
-                setValue={setPassword}
-                secureTextEntry={true}
-            />
+                    <Box style={styles.inputsSeparado}>
+                        <TextInput
+                            placeholder='Senha'
+                            value={password}
+                            onChangeText={setPassword}
+                            style={styles.caixaInputs}
+                        />
+                    </Box>
 
-            <CustomButton text="Login" onPress={onLoginPressed} />
+                    <Pressable
+                        style={styles.esqueceuSenha}
+                        onPress={desenvolvimento}
+                    >
+                        <Text>Esqueceu a senha?</Text>
+                    </Pressable>
+                </Box>
 
-            <TouchableOpacity
-                onPress={() => navigation.navigate("RegisterUser")}
-                style={styles.register}
-            >
-                <Text>
-                    Não tem uma conta?{" "}
-                    <Text style={styles.createAccountText}>
-                        Crie uma
-                    </Text>
-                </Text>
-            </TouchableOpacity>
+                <Box style={styles.botoes}>
+                    <Box style={styles.botoesSeparados}>
+                        <Button 
+                            onPress={onLoginPressed}
+                            style={[styles.customBotao, { backgroundColor: '#FFBA52'}]}
+                        >
+                            <Text>Login</Text>
+                        </Button>
+                    </Box>
 
+                    <Box style={styles.botoesSeparados}>
+                        <Button
+                            onPress={() => navigation.navigate("RegisterUser")}
+                            style={[styles.customBotao, { backgroundColor: '#FFF', borderWidth: '1px', borderColor: '#FFBA52' }]}
+                        >
+                            <Text>Cadastre-se</Text>
+                        </Button>
+                    </Box>
+
+                    <Text style={{textAlign: 'center', paddingVertical: 30}}>Ou</Text>
+
+                    <Box style={styles.botoesSeparados}>
+                        <Button
+                            style={styles.botoesAPI}
+                            onPress={desenvolvimento}
+                        >
+                            <FontAwesome name="google" size={20} color='#000'/>
+                            <Text>Entrar com o Google</Text>
+                        </Button>
+                    </Box>
+
+                    <Box style={styles.botoesSeparados}>
+                        <Button
+                            style={styles.botoesAPI}
+                            onPress={desenvolvimento}
+                        >
+                            <FontAwesome5
+                                name="facebook"
+                                size={20}
+                                color='#000'
+                            />
+                            <Text>Entrar com o Facebook</Text>
+                        </Button>
+                    </Box>
+                </Box>
+            </Center>
         </View>
     )
 };
 
 const styles = StyleSheet.create({
-    view: {
+    containerGeral: {
         flex: 1,
+        backgroundColor: '#FFF'
+    },
+
+    topo: {
         justifyContent: 'center',
-        alignItems: 'center',
-        padding: 20,
-        backgroundColor: '#FFBA52',
+        paddingVertical: 100
     },
-    logo: {
-        width: '70%',
-        maxWidth: 300,
-        maxHeight: 200,
+
+    image: {
+        paddingVertical: 100
     },
-    createAccountText: {
-        fontWeight: "bold",
-        color: "#6200ee",
+
+    loginImage: {
+        marginTop: -50
     },
-    register: {
-        padding: 5,
-    }
+
+    inputs: {
+        width: '90%',
+        height: '30%',
+        marginTop: -50
+    },
+
+    inputsSeparado: {
+        paddingVertical: 20,
+    },
+
+    caixaInputs: {
+        height: '50px',
+        borderWidth: '1px',
+        borderRadius: 5,
+        borderColor: '#E4E4E4',
+        backgroundColor: '#F8F8F8',
+        paddingHorizontal: 20
+    },
+
+    botoes: {
+        width: '90%',
+    },
+
+    botoesSeparados: {
+        paddingVertical: 10
+    },
+
+    customBotao: {
+        height: '50px',
+        borderRadius: 46,
+    },
+
+    botoesAPI: {
+        backgroundColor: '#FFF',
+        borderWidth: '1px',
+        borderColor: '#E4E4E4',
+        borderRadius: 46,
+    },
+
+    
 });
 
 export default Login;
