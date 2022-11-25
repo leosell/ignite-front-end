@@ -43,7 +43,7 @@ const Login = ({ navigation }) => {
                 <Box style={styles.topo}>
                     <Image
                         source={Logo}
-                        style={[styles.image,]}
+                        style={styles.image}
                         resizeMode='contain'
                     />
                     <Text style={styles.loginImage}>Entre e faça seu login!</Text>
@@ -82,7 +82,7 @@ const Login = ({ navigation }) => {
                             onPress={onLoginPressed}
                             style={[styles.customBotao, { backgroundColor: '#FFBA52'}]}
                         >
-                            <Text>Login</Text>
+                            <Text style={{fontWeight: 'bold'}}>Login</Text>
                         </Button>
                     </Box>
 
@@ -91,7 +91,7 @@ const Login = ({ navigation }) => {
                             onPress={() => navigation.navigate("RegisterUser")}
                             style={[styles.customBotao, { backgroundColor: '#FFF', borderWidth: '1px', borderColor: '#FFBA52' }]}
                         >
-                            <Text>Cadastre-se</Text>
+                            <Text style={{fontWeight: 'bold'}}>Cadastre-se</Text>
                         </Button>
                     </Box>
 
@@ -174,16 +174,15 @@ const styles = StyleSheet.create({
 
     customBotao: {
         height: '50px',
-        borderRadius: 46,
+        borderRadius: 5,
     },
 
     botoesAPI: {
         backgroundColor: '#FFF',
         borderWidth: '1px',
         borderColor: '#E4E4E4',
-        borderRadius: 46,
+        borderRadius: 5,
     },
-
     
 });
 
