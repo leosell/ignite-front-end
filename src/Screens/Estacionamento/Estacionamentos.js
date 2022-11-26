@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Button, ScrollView } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
+import { Center } from 'native-base'
 
 import api from '../../API'
 import { Context } from '../../Context/authContext'
@@ -29,56 +30,61 @@ const Estacionamentos = ({ navigation }) => {
 
 
     return (
-        <View>
-            <View style={styles.view}>
-                { state.isAdmin ? (
-                    <View style={styles.botaoNovo}>
-                        <CustomButton
-                            text='Novo Estacionamento'
-                            onPress={() => navigation.navigate('RegisterEstacionamento')}
-                        />
-                    </View>
-                ) : (
-                    <></>
-                )}
-            </View>
+        <View style={{ backgroundColor: '#FFF', flex: 1 }}>
+            <Center style={{ paddingVertical: 30 }}>
+                <Text style={{ fontWeight: 'bold', fontSize: 24}}>Estacionamento</Text>
+                <View style={styles.containerCabecalho}>
+                    { state.isAdmin ? (
+                        <View style={styles.botaoNovo}>
+                            <CustomButton
+                                text='Novo Estacionamento'
+                                onPress={() => navigation.navigate('RegisterEstacionamento')}
+                            />
+                        </View>
+                    ) : (
+                        <></>
+                    )}
+                </View>
+            </Center>
 
-            <ScrollView style={styles.view2}>
+            <ScrollView style={styles.containerCard}>
                 <FlatList
                 data={estacionamento}
                 renderItem={({ item }) => {return (
-                    <View style={styles.container}>
-                        <View>
-                            <Text style={styles.text}>
-                                <Text style={styles.text2}>Estacionamento: </Text>{ item.nome }
-                            </Text>
-                            
-                            <Text style={styles.text}>
-                                <Text style={styles.text2}>Endereço: </Text>{ item.endereco }, { item.numero }
-                            </Text>
-                            
-                            <Text style={styles.text}>
-                                <Text style={styles.text2}>Bairro: </Text>{ item.bairro }
-                            </Text>
-                        </View>
-
-                        {state.isAdmin ? (
-                            <View style={styles.containerBotao}>
-                                <TouchableOpacity
-                                    onPress={() => deletarId(item.id)}
-                                    style={styles.botao}
-                                >
-                                    <Entypo
-                                        name='trash'
-                                        size={30}
-                                        color='#000'
-                                    />
-                                </TouchableOpacity>
+                    <Center>
+                        <View style={styles.container}>
+                            <View>
+                                <Text style={styles.text}>
+                                    <Text style={styles.text2}>Estacionamento: </Text>{ item.nome }
+                                </Text>
+                                
+                                <Text style={styles.text}>
+                                    <Text style={styles.text2}>Endereço: </Text>{ item.endereco }, { item.numero }
+                                </Text>
+                                
+                                <Text style={styles.text}>
+                                    <Text style={styles.text2}>Bairro: </Text>{ item.bairro }
+                                </Text>
                             </View>
-                        ) : (
-                            <></>
-                        )}
-                    </View>
+
+                            {state.isAdmin ? (
+                                <View style={styles.containerBotao}>
+                                    <TouchableOpacity
+                                        onPress={() => deletarId(item.id)}
+                                        style={styles.botao}
+                                    >
+                                        <Entypo
+                                            name='trash'
+                                            size={30}
+                                            color='#000'
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                            ) : (
+                                <></>
+                            )}
+                        </View>
+                    </Center>
                 )}}
                 style={styles.list}
                 keyExtractor={(item) => item.id}
@@ -91,29 +97,27 @@ const Estacionamentos = ({ navigation }) => {
 export default Estacionamentos
 
 const styles = StyleSheet.create({
-    view: {
-        flex: 1,
-        flexDirection: 'column',
-        padding: 5
+    containerCabecalho: {
+        width: '70%'
+    },
+    
+    botaoNovo: {
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 
-    view2: {
-        padding: 10,
+    containerCard: {
+
     },
 
     container: {
-        width: '100%',
+        width: '90%',
         height: '15vh',
         backgroundColor: '#FFBA52',
         flexDirection: 'row',
-        justifyContent: 'space-evenly',
         alignItems:'center',
-        marginVertical: 10,
-        borderRadius: 10,
-    },
-
-    list: {
-        padding: 5,
+        borderRadius: 5,
+        // marginVertical: 10,
     },
 
     containerBotao: {
@@ -131,10 +135,6 @@ const styles = StyleSheet.create({
         height: '50px'
     },
 
-    botaoNovo: {
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
 
     text: {
         fontSize: 16,
