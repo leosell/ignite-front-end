@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     },
 
     cadastrar: {
-        backgroundColor: '#FFC978',
+        backgroundColor: '#FFBA59',
         width: '85%',
         marginVertical: 5,
         alignItems: 'center',
