@@ -1,7 +1,7 @@
-import { Picker, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View } from 'react-native'
+import { Picker, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View, Pressable } from 'react-native'
 import React, { useContext, useState } from 'react'
+import { AntDesign } from '@expo/vector-icons'
 
-import CustomButton from '../../Components/CustomButton'
 import CustomInput from '../../Components/CustomInput'
 
 import api from '../../API'
@@ -56,6 +56,18 @@ const RegisterEstacionamento = ({ navigation }) => {
     }
     return (
         <View>
+            <View style={{ padding: 30 }}>
+                <Pressable
+                    onPress={() => navigation.navigate('Estacionamentos')}
+                >
+                    <AntDesign
+                        name='left'
+                        color='#FFBA52'
+                        size={30}
+                        style={styles.setaIcone}
+                    />
+                </Pressable>
+            </View>
             <View style={styles.textoRegistro}>
                 <Text style={styles.texto}>Registro de Estacionamento</Text>
             </View>

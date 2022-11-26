@@ -30,6 +30,10 @@ const RegisterCarteira = ({ navigation }) => {
         }
     }
 
+    const notificacao = () => {
+        alert('Em desenvolvimento...')
+    }
+
     return (
 
         <Box style={styles.box}>
@@ -60,25 +64,25 @@ const RegisterCarteira = ({ navigation }) => {
 
                 <View style={styles.ContainerBotoes}>
                     <View style={styles.botao1}>
-                        <Pressable style={styles.botao} onPress={() => alert('Em breve...')}>
+                        <Pressable style={styles.botao} onPress={notificacao}>
                             <MaterialIcons name="attach-money" size={30} color="black" />
                         </Pressable>
                         <Text style={styles.textoBotao}>Cashback</Text>
                     </View>
                     <View style={styles.botao1}>
-                        <Pressable onPress={() => alert('Em breve...')} style={styles.botao}>
+                        <Pressable onPress={notificacao} style={styles.botao}>
                             <MaterialIcons name="phone-iphone" size={30} color="black" />
                         </Pressable>
                         <Text style={styles.textoBotao} t>Recarga</Text>
                     </View>
                     <View style={styles.botao1}>
-                        <Pressable onPress={() => alert('Em breve...')} style={styles.botao}>
+                        <Pressable onPress={notificacao} style={styles.botao}>
                             <Entypo name="map" size={30} color="black" />
                         </Pressable>
                         <Text style={styles.textoBotao}>Mapa</Text>
                     </View>
                     <View style={styles.botao1}>
-                        <Pressable onPress={() => alert('Em breve...')} style={styles.botao}>
+                        <Pressable onPress={notificacao} style={styles.botao}>
                             <FontAwesome5 name="user-friends" size={25} color="black" />
                         </Pressable>
                         <Text style={styles.textoBotao}>Convidar</Text>

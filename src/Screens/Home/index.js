@@ -14,6 +14,10 @@ const Home = ({ navigation }) => {
 
     const [ modalVisible, setModalVisible ] = useState(false)
 
+    const alertasDesenvolvimento = () => {
+        alert('Em desenvolvimento...')
+    }
+
     return (
 
         <View style={styles.tela}>
@@ -67,7 +71,9 @@ const Home = ({ navigation }) => {
 
             <View style={styles.div}>
                 <TouchableOpacity
-                    style={styles.botaoCartao}>
+                    style={styles.botaoCartao}
+                    onPress={alertasDesenvolvimento}
+                >
                     <Ionicons
                         name='md-card'
                         size={25}
