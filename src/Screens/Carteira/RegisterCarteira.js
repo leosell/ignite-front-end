@@ -8,7 +8,7 @@ import { BlurView } from 'expo-blur';
 
 
 
-const RegisterCarteira = () => {
+const RegisterCarteira = ({ navigation }) => {
     const { state, dispatch } = useContext(Context)
 
     const [saldo, setSaldo] = useState('')
@@ -23,6 +23,7 @@ const RegisterCarteira = () => {
             if (authData.status === 200) {
                 alert(authData.data.message)
                 setSaldo('')
+                dispatch({ type: 'update', payload: true })
             }
         } catch (error) {
             console.log(error)
@@ -35,7 +36,9 @@ const RegisterCarteira = () => {
             <View style={styles.containerGeral}>
                 <View style={styles.conta}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <Pressable>
+                        <Pressable
+                            onPress={() => navigation.navigate('Home')}
+                        >
                             <AntDesign
                                 name='left'
                                 size={30}
@@ -86,12 +89,12 @@ const RegisterCarteira = () => {
                     <Box>
                         <Center>
                             <Input
-                                variant="rounded"
+                                variant="filled"
                                 mx='1' w='95%'
                                 placeholder='Buscar'
                                 backgroundColor='#FFC978'
-                                color='black'
-                                placeholderTextColor='black'
+                                color='#000'
+                                placeholderTextColor='#000'
                             />
                         </Center>
                     </Box>
@@ -128,8 +131,8 @@ const RegisterCarteira = () => {
                                     <Center>
                                         {/* <Text style={{}}>Adicionar</Text> */}
                                         <Text style={{ fontWeight: '400', marginBottom: '25px', fontSize: '24px' }}>Adicionar</Text>
-                                        <Input variant="underlined" placeholder='R$: 0.00' type='' />
-                                        <Button size='sm' onPress={() => setModalVisible(false)} style={styles.botaoSaldo}>
+                                        <Input variant="underlined" placeholder='R$: 0.00' type='' value={saldo} onChangeText={setSaldo} />
+                                        <Button size='sm' onPress={onRegisterPressed} style={styles.botaoSaldo}>
                                             <Text style={{ fontSize: '16px' }}>Inserir Saldo</Text>
                                         </Button>
                                     </Center>

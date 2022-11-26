@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     botaoCartao: {
         width: '70%',
         height: '50px',
-        borderRadius: '10px',
+        borderRadius: '5px',
         backgroundColor: '#FFC978',
         fontWeight: 'bolder',
         textAlign: 'center',

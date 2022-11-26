@@ -102,8 +102,13 @@ const Login = ({ navigation }) => {
                             style={styles.botoesAPI}
                             onPress={desenvolvimento}
                         >
-                            <FontAwesome name="google" size={20} color='#000'/>
-                            <Text>Entrar com o Google</Text>
+                            <FontAwesome
+                                name="google"
+                                size={20}
+                                color='#000'
+                                style={{ marginLeft: '-30px'}}
+                            />
+                            <Text style={{ marginTop: '-18px' }}>Entrar com o Google</Text>
                         </Button>
                     </Box>
 
@@ -116,8 +121,9 @@ const Login = ({ navigation }) => {
                                 name="facebook"
                                 size={20}
                                 color='#000'
+                                style={{ marginLeft: '-30px'}}
                             />
-                            <Text>Entrar com o Facebook</Text>
+                            <Text style={{ marginTop: '-18px' }}>Entrar com o Facebook</Text>
                         </Button>
                     </Box>
                 </Box>
@@ -182,6 +188,7 @@ const styles = StyleSheet.create({
         borderWidth: '1px',
         borderColor: '#E4E4E4',
         borderRadius: 5,
+        height: '50px'
     },
     
 });

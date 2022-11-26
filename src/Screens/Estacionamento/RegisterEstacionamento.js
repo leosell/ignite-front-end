@@ -133,7 +133,7 @@ const RegisterEstacionamento = ({ navigation }) => {
                     onPress={onRegisterPressed}
                     style={styles.cadastrar}
                 >
-                    Cadastrar
+                    <Text style={styles.cadastrarTexto}>Cadastrar</Text>
                 </TouchableOpacity>
             </View>
 
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF',
         width: '85%',
         marginVertical: 5,
-        borderRadius: 20,
+        borderRadius: 5,
         border: 'none',
         height: 46,
         paddingHorizontal: 10,
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF',
         width: '85%',
         marginVertical: 5,
-        borderRadius: 20,
+        borderRadius: 5,
         border: 'none',
         height: 46,
         paddingHorizontal: 10,
@@ -190,9 +190,11 @@ const styles = StyleSheet.create({
         marginVertical: 5,
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 20,
+        borderRadius: 5,
         height: 46,
-        fontWeight: 'bold',
+    },
 
+    cadastrarTexto: {
+        fontWeight: 'bold',
     }
 })
