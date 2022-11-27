@@ -1,6 +1,6 @@
-import { Text, Pressable, StyleSheet, View, Image, TouchableOpacity, Modal } from 'react-native'
+import { Text, Pressable, StyleSheet, View, Modal, Alert } from 'react-native'
 import React, { useContext, useState } from 'react'
-import { FontAwesome, AntDesign, Ionicons, MaterialIcons, Entypo, FontAwesome5, SimpleLineIcons } from '@expo/vector-icons'
+import { AntDesign, Ionicons, MaterialIcons, Entypo, FontAwesome5, SimpleLineIcons } from '@expo/vector-icons'
 import api from '../../API'
 import { Context } from '../../Context/authContext'
 import { Box, Input, Center, Button } from 'native-base'
