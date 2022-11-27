@@ -19,7 +19,7 @@ const RegisterEstacionamento = ({ navigation }) => {
     const [ cidade, setCidade ] = useState('')
     const [ estado, setEstado ] = useState('')
     const [ funcionamento, setFuncionamento ] = useState('')
-    const [ horaFuncionamento, setHoraFuncionamento ] = useState('')
+    const [ horario, setHorario ] = useState('')
 
     const { height } = useWindowDimensions()
 
@@ -34,7 +34,7 @@ const RegisterEstacionamento = ({ navigation }) => {
                 cidade: cidade,
                 estado: estado,
                 funcionamento: funcionamento,
-                horaFuncionamento: horaFuncionamento
+                horario: horario
             })
 
             if (authData.status === 200) {
@@ -47,7 +47,7 @@ const RegisterEstacionamento = ({ navigation }) => {
                 setCidade('')
                 setEstado('')
                 setFuncionamento('')
-                setHoraFuncionamento('')
+                setHorario('')
                 dispatch({ type: 'update', payload: true })
             } else {
                 console.log(authData.data.message)
@@ -130,8 +130,8 @@ const RegisterEstacionamento = ({ navigation }) => {
 
 
                 <Picker
-                    selectedValue={horaFuncionamento}
-                    onValueChange={setHoraFuncionamento}
+                    selectedValue={horario}
+                    onValueChange={setHorario}
                     style={styles.hora}
                 >
                     <Picker.Item label="Horario de Funcionamento" value="0" />
