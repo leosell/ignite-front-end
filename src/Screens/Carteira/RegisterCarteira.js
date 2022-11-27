@@ -1,5 +1,5 @@
-import { Text, Pressable, StyleSheet, View, Modal, Alert } from 'react-native'
-import React, { useContext, useState } from 'react'
+import { Text, Pressable, StyleSheet, View, Modal, Alert, FlatList, ScrollView } from 'react-native'
+import React, { useContext, useEffect, useState } from 'react'
 import { AntDesign, Ionicons, MaterialIcons, Entypo, FontAwesome5, SimpleLineIcons } from '@expo/vector-icons'
 import api from '../../API'
 import { Context } from '../../Context/authContext'
@@ -14,10 +14,14 @@ const RegisterCarteira = ({ navigation }) => {
     const [saldo, setSaldo] = useState('')
     const [modalVisible, setModalVisible] = useState(false)
 
+    const [carteira, setCarteira] = useState({})
+    const [update, setUpdate] = useState(false)
+
     const onRegisterPressed = async () => {
         try {
             const authData = await api.post('/carteira/register', {
-                saldo: saldo
+                saldo: saldo,
+                idUsuario: state.idUser
             })
 
             if (authData.status === 200) {
@@ -34,8 +38,15 @@ const RegisterCarteira = ({ navigation }) => {
         alert('Em desenvolvimento...')
     }
 
-    return (
+    useEffect(() => {
+        const screenLoad = async () => {
+            const list = await api.get('/carteira/busca')
+            setCarteira(list.data.carteira)
+        }
+        screenLoad()
+    }, [update])
 
+    return (
         <Box style={styles.box}>
             <View style={styles.containerGeral}>
                 <View style={styles.conta}>
@@ -100,21 +111,30 @@ const RegisterCarteira = ({ navigation }) => {
                                 color='#000'
                                 placeholderTextColor='#000'
                             />
+
+                            <ScrollView>
+                                <FlatList
+                                    data={carteira}
+                                    renderItem={({ item }) => {
+                                        return (
+                                            <View style={{ flexDirection: 'row', padding: '20px', justifyContent: 'center', alignContent: 'center', alignItems: 'center' }}>
+                                                <Ionicons name="add-circle-outline" size={44} color="black" />
+                                                <Box>
+                                                    <Box style={{ flexDirection: 'row', gap: '250px' }}>
+                                                        <Text style={{ fontSize: '14px', fontWeight: '600' }}>Crédito Adicionado</Text>
+                                                        <Text style={{ color: 'gray' }}>{item.dataTransferencia}</Text>
+                                                    </Box>
+                                                    <Text style={{ color: 'gray' }}>Cartão de crédito</Text>
+                                                    <Text style={{ color: 'gray' }}>R${item.saldo}</Text>
+                                                </Box>
+                                            </View>
+                                        )
+                                    }}
+                                    keyExtractor={(item) => item.id}
+                                />
+                            </ScrollView>
                         </Center>
                     </Box>
-
-                    <View style={{ flexDirection: 'row', padding: '20px', justifyContent: 'center', alignContent: 'center', alignItems: 'center' }}>
-                        <Ionicons name="add-circle-outline" size={44} color="black" />
-                        <Box>
-                            <Box style={{ flexDirection: 'row', gap: '250px' }}>
-                                <Text style={{ fontSize: '14px', fontWeight: '600' }}>Crédito Adicionado</Text>
-                                <Text style={{ color: 'gray' }}>{state.dataExtrato}Hoje</Text>
-                            </Box>
-                            <Text style={{ color: 'gray' }}>Cartão de crédito</Text>
-                            <Text style={{ color: 'gray' }}>R${state.valor}</Text>
-                        </Box>
-                    </View>
-
                 </Box>
             </View>
 
