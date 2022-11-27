@@ -1,6 +1,8 @@
-import { Text, Pressable, StyleSheet, View, Image, TouchableOpacity, Modal, TextInput } from 'react-native'
+import { Text, Alert, Pressable, StyleSheet, View, Image, TouchableOpacity, Modal, TextInput } from 'react-native'
 import React, { useContext, useState } from 'react'
 import { FontAwesome, AntDesign, Ionicons } from '@expo/vector-icons'
+import { Box, Input, Center, Button } from 'native-base'
+import { BlurView } from 'expo-blur';
 
 import { Context } from '../../Context/authContext'
 
@@ -10,235 +12,276 @@ import Carteira from '../Carteira/Carteira'
 
 
 const Home = ({ navigation }) => {
-    const { state, dispatch } = useContext(Context)
+  const { state, dispatch } = useContext(Context)
 
-    const [ modalVisible, setModalVisible ] = useState(false)
+  const [modalVisible, setModalVisible] = useState(false)
 
-    const alertasDesenvolvimento = () => {
-        alert('Em desenvolvimento...')
-    }
+  const alertasDesenvolvimento = () => {
+    alert('Em desenvolvimento...')
+  }
 
-    return (
+  return (
 
-        <View style={styles.tela}>
-            <View style={styles.cabecalho}>
-                <Pressable
-                    onPress={() => setModalVisible(true)}
-                    style={styles.perfil}
-                >
-                    <FontAwesome
-                        name='user'
-                        size={30}
-                        color='#000'
-                        style={styles.icon}
-                    />
-                </Pressable>
+    <View style={styles.tela}>
+      <View style={styles.cabecalho}>
+        <Pressable
+          onPress={() => setModalVisible(true)}
+          style={styles.perfil}
+        >
+          <FontAwesome
+            name='user'
+            size={30}
+            color='#000'
+            style={styles.icon}
+          />
+        </Pressable>
 
-                <Text style={styles.texto}>Olá, {state.name}</Text>
+        <Text style={styles.texto}>Olá, {state.name}</Text>
 
-                <Pressable
-                    onPress={() => alert('config')}
-                    style={styles.config}
-                >
-                    <FontAwesome
-                        name='gear'
-                        size={30}
-                        color='#000'
-                        style={styles.icon}
-                    />
-                </Pressable>
-            </View>
+        <Pressable
+          onPress={() => alert('config')}
+          style={styles.config}
+        >
+          <FontAwesome
+            name='gear'
+            size={30}
+            color='#000'
+            style={styles.icon}
+          />
+        </Pressable>
+      </View>
 
-            <View style={styles.conta}>
-                <View>
-                    <Text style={styles.textoConta}>Conta</Text>
-                    <Text style={styles.textoDinheiro}>R$ {state.valor}</Text>
-                </View>
-
-                <View>
-                    <Pressable>
-                        <AntDesign
-                            name='right'
-                            size={30}
-                            color='#FFBA52'
-                            style={styles.setaIcone}
-                            onPress={() => navigation.navigate('Carteira')}
-                        />
-                    </Pressable>
-                </View>
-
-            </View>
-
-            <View style={styles.div}>
-                <TouchableOpacity
-                    style={styles.botaoCartao}
-                    onPress={alertasDesenvolvimento}
-                >
-                    <Ionicons
-                        name='md-card'
-                        size={25}
-                        color='black'
-                        style={{ marginLeft: '15px' }}
-                        />
-                    <Text style={styles.textoConta}>Meus cartões</Text>
-                </TouchableOpacity>
-                
-                <Image
-                    source={Map}
-                    style={styles.imagemMapa}
-                />
-                
-            </View>
-
-            <View style={styles.centeredView}>
-                <Modal
-                    animationType='slide'
-                    transparent={true}
-                    visible={modalVisible}
-                    onRequestClose={() => {
-                        Alert.alert('Modal has been closed')
-                        setModalVisible(false)
-                    }}
-                >
-                    <View style={styles.centeredView}>
-                        <View style={styles.modalView}>
-                            <Text>Perfil</Text>
-                
-                            <Pressable
-                                onPress={() => setModalVisible(false)}
-                            >
-                                <Text>Fechar</Text>
-                            </Pressable>
-                        </View>
-                    </View>
-                </Modal>
-            </View>
+      <View style={styles.conta}>
+        <View>
+          <Text style={styles.textoConta}>Conta</Text>
+          <Text style={styles.textoDinheiro}>R$ {state.valor}</Text>
         </View>
 
-    )
+        <View>
+          <Pressable>
+            <AntDesign
+              name='right'
+              size={30}
+              color='#FFBA52'
+              style={styles.setaIcone}
+              onPress={() => navigation.navigate('Carteira')}
+            />
+          </Pressable>
+        </View>
+
+      </View>
+
+      <View style={styles.div}>
+        <TouchableOpacity
+          style={styles.botaoCartao}
+          onPress={alertasDesenvolvimento}
+        >
+          <Ionicons
+            name='md-card'
+            size={25}
+            color='black'
+            style={{ marginLeft: '15px' }}
+          />
+          <Text style={styles.textoConta}>Meus cartões</Text>
+        </TouchableOpacity>
+
+        <Image
+          source={Map}
+          style={styles.imagemMapa}
+        />
+
+      </View>
+
+      <View style={styles.centeredView}>
+        <Modal
+          animationType='slide'
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed')
+            setModalVisible(false)
+          }}
+        >
+          <Center>
+            <BlurView intensity={30} tint='light'>
+              <Center height={950} width={650} style={styles.editModal}>
+                <Box>
+                  <Center>
+                    <Text style={{ marginBottom: '50px', fontSize: '22px', fontWeight: '600' }}>Perfil</Text>
+                    <Box>
+                      <Box>
+                        <Text>Nome</Text>
+                        <Input variant="underlined" />
+                      </Box>
+
+                      <Box>
+                        <Text>E-mail</Text>
+                        <Input variant="underlined" />
+                      </Box>
+
+                      <Box>
+                        <Text>CPF</Text>
+                        <Input variant="underlined" />
+                      </Box>
+
+                      <Box>
+                        <Text>Data de nascimento</Text>
+                        <Input variant="underlined" />
+                      </Box>
+                    </Box>
+
+                    <Box style={{ flexDirection: 'row', gap: '15px' }}>
+                      <Button size='sm' style={styles.botaoSaldo}>
+                        <Text style={{ fontWeight: '600' }}>Fechar</Text>
+                      </Button>
+
+                      <Button size='sm' style={styles.botaoSaldo}>
+                        <Text style={{ fontWeight: '600' }}>Salvar</Text>
+                      </Button>                      
+                    </Box>
+
+                    <Box>
+                        <Button size='md' style={styles.botaoSenha}>
+                          <Text style={{ fontWeight: '600' }}>Alterar senha</Text>
+                        </Button>
+                      </Box>
+                  </Center>
+                </Box>
+              </Center>
+            </BlurView>
+
+          </Center>
+
+        </Modal>
+      </View >
+    </View>
+
+  )
 }
 
 export default Home
 
 const styles = StyleSheet.create({
-    tela: {
-        flex: '1',
-        backgroundColor: '#FFF'
-    },
+  tela: {
+    flex: '1',
+    backgroundColor: '#FFF'
+  },
 
-    cabecalho: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        backgroundColor: '#FFBA52',
-        alignItems: 'center',
+  cabecalho: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: '#FFBA52',
+    alignItems: 'center',
 
-    },
+  },
 
-    perfil: {
-        margin: 30,
-        width: 50,
-        height: 50,
-        backgroundColor: '#FFC978',
-        borderRadius: 40,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
+  perfil: {
+    margin: 30,
+    width: 50,
+    height: 50,
+    backgroundColor: '#FFC978',
+    borderRadius: 40,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
 
-    icon: {
-        textAlign: 'center',
-        paddingVertical: 'auto',
-    },
+  icon: {
+    textAlign: 'center',
+    paddingVertical: 'auto',
+  },
 
-    config: {
-        margin: 30,
-        width: 50,
-        height: 50,
-        backgroundColor: '#FFC978',
-        borderRadius: 40,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
+  config: {
+    margin: 30,
+    width: 50,
+    height: 50,
+    backgroundColor: '#FFC978',
+    borderRadius: 40,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
 
-    texto: {
-        fontWeight: 'bold',
-        fontSize: '22px'
-    },
+  texto: {
+    fontWeight: 'bold',
+    fontSize: '22px'
+  },
 
-    textoConta: {
-        fontSize: '18px'
-    },
+  textoConta: {
+    fontSize: '18px'
+  },
 
-    textoDinheiro: {
-        fontSize: '18px',
-        padding: '1px'
-    },
+  textoDinheiro: {
+    fontSize: '18px',
+    padding: '1px'
+  },
 
-    conta: {
-        padding: '25px',
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    },
+  conta: {
+    padding: '25px',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
 
-    setaIcone: {
-        marginTop: '5px'
-    },
+  setaIcone: {
+    marginTop: '5px'
+  },
 
-    div: {
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
+  div: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 
-    botaoCartao: {
-        width: '70%',
-        height: '50px',
-        borderRadius: '5px',
-        backgroundColor: '#FFC978',
-        fontWeight: 'bolder',
-        textAlign: 'center',
-        gap: '20px',
-        fontSize: '20px',
-        flexDirection: 'row',
-        alignItems: 'center',
-        border: '1px outset #000',
-        marginTop: '20px'
-    },
+  botaoCartao: {
+    width: '70%',
+    height: '50px',
+    borderRadius: '5px',
+    backgroundColor: '#FFC978',
+    fontWeight: 'bolder',
+    textAlign: 'center',
+    gap: '20px',
+    fontSize: '20px',
+    flexDirection: 'row',
+    alignItems: 'center',
+    border: '1px outset #000',
+    marginTop: '20px'
+  },
 
-    imagemMapa: {
-        width: 450,
-        height: 550,
-        marginTop: '40px',
-        borderRadius: '10px',
-        border: '1px solid black',
-        shadowColor: "black",
-        shadowOffset: {
-            width: 10,
-            height: 30,
-        },
-        shadowOpacity: 1,
+  imagemMapa: {
+    width: 450,
+    height: 550,
+    marginTop: '40px',
+    borderRadius: '10px',
+    border: '1px solid black',
+    shadowColor: "black",
+    shadowOffset: {
+      width: 10,
+      height: 30,
     },
+    shadowOpacity: 1,
+  },
 
-    centeredView: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: 22
-    },
+  editModal: {
+    backgroundColor: '#FFFC',
+    fontWeight: '400',
+    borderRadius: '20px',
+    color: 'white',
 
-    modalView: {
-        margin: 20,
-        backgroundColor: "white",
-        borderRadius: 20,
-        padding: 35,
-        alignItems: "center",
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5,
-        width: '70%',
-        height: '50%'
-    },
+    // color='white' bg='gray.100' fontWeight={400} marginTop={'50%'}
+  },
+  botaoSaldo: {
+    backgroundColor: '#FFC978',
+    borderRadius: '5px',
+    marginTop: '10px',
+    textAlign: 'center',
+    fontWeight: '800'
+  },
+
+  containerInputs: {
+    marginTop: '55px'
+  },
+  botaoSenha:{
+    backgroundColor: '#FFC978',
+    borderRadius: '5px',
+    marginTop: '10px',
+    textAlign: 'center',
+    width: '145px',
+  }
 })
