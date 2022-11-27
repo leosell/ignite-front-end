@@ -33,7 +33,8 @@ const RegisterEstacionamento = ({ navigation }) => {
                 bairro: bairro,
                 cidade: cidade,
                 estado: estado,
-                funcionamento: funcionamento
+                funcionamento: funcionamento,
+                horaFuncionamento: horaFuncionamento
             })
 
             if (authData.status === 200) {
@@ -46,6 +47,7 @@ const RegisterEstacionamento = ({ navigation }) => {
                 setCidade('')
                 setEstado('')
                 setFuncionamento('')
+                setHoraFuncionamento('')
                 dispatch({ type: 'update', payload: true })
             } else {
                 console.log(authData.data.message)
