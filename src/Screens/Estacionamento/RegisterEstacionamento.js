@@ -60,22 +60,10 @@ const RegisterEstacionamento = ({ navigation }) => {
     return (
         <View>
             <View style={{ flexDirection: 'row', padding: '25px' }}>
-                <Pressable onPress={() => navigation.navigate("RegisterEstacionamento")}>
+                <Pressable onPress={() => navigation.navigate("Estacionamentos")}>
                     <AntDesign name="arrowleft" size={24} color="black" />
                 </Pressable>
-                <Text style={{ marginLeft: '5px', fontWeight: '500' }}>Voltar</Text>
-            </View>
-            <View style={{ padding: 30 }}>
-                <Pressable
-                    onPress={() => navigation.navigate('Estacionamentos')}
-                >
-                    <AntDesign
-                        name='left'
-                        color='#FFBA52'
-                        size={30}
-                        style={styles.setaIcone}
-                    />
-                </Pressable>
+                <Text style={{ marginLeft: '5px', marginTop: '4px', fontWeight: '500' }}>Voltar</Text>
             </View>
             <View style={styles.textoRegistro}>
                 <Text style={styles.texto}>Registro de Estacionamento</Text>
