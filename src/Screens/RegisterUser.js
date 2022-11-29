@@ -1,19 +1,15 @@
-import { StyleSheet, Text, View, Image, useWindowDimensions, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View,  TouchableOpacity, TextInput, Pressable } from "react-native";
 import React, { useState } from 'react';
-
 import api from '../API'
-
-import CustomInput from "../Components/CustomInput";
 import CustomButton from "../Components/CustomButton";
-
-import Logo from "../../assets/images/Logo.png";
+import { AntDesign } from '@expo/vector-icons';
+import { Box, Center, Checkbox } from 'native-base'
 
 const RegisterUser = ({ navigation }) => {
     const [nome, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const { height } = useWindowDimensions();
 
     const onRegisterPressed = async () => {
         try {
@@ -37,41 +33,64 @@ const RegisterUser = ({ navigation }) => {
 
     return (
         <View style={styles.view}>
-            <Image
-                source={Logo}
-                style={[styles.logo, { height: height * 0.3 }]}
-                resizeMode="contain"
-            />
+            <View style={{ flexDirection: 'row' }}>
+                <Pressable onPress={() => navigation.navigate("Login")}>
+                    <AntDesign name="arrowleft" size={24} color="black" />
+                </Pressable>
+                <Text style={{ marginLeft: '5px', fontWeight: '500' }}>Voltar</Text>
+            </View>
 
-            <CustomInput
-                placeholder="Nome"
-                value={nome}
-                setValue={setName}
-            />
+            <Box style={{ alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: '32px', fontWeight: 'bolder', marginBottom: '25px' }}>Cadastro</Text>
+                <Text style={{ fontWeight: '500', textAlign: 'center' }}>Preencha os campos e comece a navegar pela nossa plataforma!</Text>
 
-            <CustomInput
-                placeholder="Email"
-                value={email}
-                setValue={setEmail}
-            />
+                <Box style={{ marginTop: '25px', width: '100%' }}>
+                    <TextInput
+                        placeholder='Nome'
+                        value={nome}
+                        setValue={setName}
+                        onChangeText={setName}
+                        style={styles.caixaInputs}
+                    />
 
-            <CustomInput
-                placeholder="Password"
-                value={password}
-                setValue={setPassword}
-                secureTextEntry={true}
-            />
+                    <TextInput
+                        placeholder='E-mail'
+                        value={email}
+                        setValue={setEmail}
+                        onChangeText={setEmail}
+                        style={styles.caixaInputs}
+                    />
 
-            <CustomButton text="Register" onPress={onRegisterPressed} />
-            <TouchableOpacity
-                onPress={() => navigation.navigate("Login")}
-                style={styles.register}
-            >
-                <Text>
-                    Já tem uma conta?{" "}
-                    <Text style={styles.loginText}>Faça o login</Text>
-                </Text>
-            </TouchableOpacity>
+                    <TextInput
+                        placeholder='Senha'
+                        value={password}
+                        setValue={setEmail}
+                        secureTextEntry={true}
+                        onChangeText={setPassword}
+                        style={styles.caixaInputs}
+                    />
+
+                    <Box>
+                        <Checkbox>
+                            <Text> Eu concordo com os <a style={{ color: '#FFBA59', textDecoration: 'underline' }}>Termos e condições</a> e a <a style={{ color: '#FFBA59', textDecoration: 'underline' }}> Política de privacidade. </a></Text>
+                        </Checkbox>
+                    </Box>
+
+                    <CustomButton text="Cadastrar" onPress={onRegisterPressed} />
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate("Login")}
+                        style={styles.register}
+                    >
+                        <Center>
+                            <Text>
+                                Já tem uma conta?{" "}
+                                <Text style={styles.loginText}>Faça o login</Text>
+                            </Text>
+                        </Center>
+                    </TouchableOpacity>
+                </Box>
+
+            </Box>
         </View>
     )
 };
@@ -79,10 +98,8 @@ const RegisterUser = ({ navigation }) => {
 const styles = StyleSheet.create({
     view: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         padding: 30,
-        backgroundColor: '#FFBA52'
+        backgroundColor: '#FFF'
     },
     logo: {
         width: '80%',
@@ -95,7 +112,20 @@ const styles = StyleSheet.create({
     },
     register: {
         padding: 5,
-    }
+    },
+
+    caixaInputs: {
+        width: '100%',
+        height: '50px',
+        borderWidth: '1px',
+        borderRadius: 5,
+        borderColor: '#E4E4E4',
+        outlineColor: "#FFF",
+        backgroundColor: '#F8F8F8',
+        paddingHorizontal: 20,
+        marginTop: '15px',
+        marginBottom: '15px'
+    },
 });
 
 export default RegisterUser;

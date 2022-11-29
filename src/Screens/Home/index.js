@@ -1,17 +1,22 @@
 import { Text, Alert, Pressable, StyleSheet, View, Image, TouchableOpacity, Modal, TextInput } from 'react-native'
 import React, { useContext, useState } from 'react'
-import { FontAwesome, AntDesign, Ionicons } from '@expo/vector-icons'
+import { AntDesign, Ionicons, Entypo, MaterialIcons, FontAwesome } from '@expo/vector-icons'
 import { Box, Input, Center, Button } from 'native-base'
 import { BlurView } from 'expo-blur';
 
 import { Context } from '../../Context/authContext'
 
-import Map from '../../../assets/images/Map.png'
+import Map from '../../../assets/images/Map.jpeg'
 
 import Carteira from '../Carteira/Carteira'
 
 
 const Home = ({ navigation }) => {
+
+  const notificacao = () => {
+    alert('Em desenvolvimento...')
+  }
+
   const { state, dispatch } = useContext(Context)
 
   const [modalVisible, setModalVisible] = useState(false)
@@ -70,7 +75,6 @@ const Home = ({ navigation }) => {
         </View>
 
       </View>
-
       <View style={styles.div}>
         <TouchableOpacity
           style={styles.botaoCartao}
@@ -137,14 +141,14 @@ const Home = ({ navigation }) => {
 
                       <Button size='sm' style={styles.botaoSaldo}>
                         <Text style={{ fontWeight: '600' }}>Salvar</Text>
-                      </Button>                      
+                      </Button>
                     </Box>
 
                     <Box>
-                        <Button size='md' style={styles.botaoSenha}>
-                          <Text style={{ fontWeight: '600' }}>Alterar senha</Text>
-                        </Button>
-                      </Box>
+                      <Button size='md' style={styles.botaoSenha}>
+                        <Text style={{ fontWeight: '600' }}>Alterar senha</Text>
+                      </Button>
+                    </Box>
                   </Center>
                 </Box>
               </Center>
@@ -245,8 +249,8 @@ const styles = StyleSheet.create({
   },
 
   imagemMapa: {
-    width: 450,
-    height: 550,
+    width: 400,
+    height: 500,
     marginTop: '40px',
     borderRadius: '10px',
     border: '1px solid black',
@@ -277,11 +281,31 @@ const styles = StyleSheet.create({
   containerInputs: {
     marginTop: '55px'
   },
-  botaoSenha:{
+  botaoSenha: {
     backgroundColor: '#FFC978',
     borderRadius: '5px',
     marginTop: '10px',
     textAlign: 'center',
     width: '145px',
-  }
+  },
+  ContainerBotoes: {
+    flex: 1,
+    flexDirection: 'row',
+    gap: '40px',
+    justifyContent: 'center'
+  },
+  botao: {
+    width: 50,
+    height: 50,
+    backgroundColor: '#FFC978',
+    borderRadius: 40,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  botao1: {
+    textAlign: 'center',
+  },
+  textoBotao: {
+    fontWeight: 600
+  },
 })

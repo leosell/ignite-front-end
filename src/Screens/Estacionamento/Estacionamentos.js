@@ -1,6 +1,7 @@
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Button, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Button, ScrollView, Pressable} from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import { Center, Wrap } from 'native-base'
+import { AntDesign } from '@expo/vector-icons';
 
 import api from '../../API'
 import { Context } from '../../Context/authContext'
@@ -32,7 +33,7 @@ const Estacionamentos = ({ navigation }) => {
   return (
     <View style={{ backgroundColor: '#FFF', flex: 1 }}>
       <Center style={{ paddingVertical: 30 }}>
-        <Text style={{ fontWeight: 'bold', fontSize: 24 }}>Estacionamento</Text>
+        <Text style={{ fontWeight: 'bold', fontSize: 24, marginBottom: '25px' }}>Estacionamento</Text>
         <View style={styles.containerCabecalho}>
           {state.isAdmin ? (
             <View style={styles.botaoNovo}>
@@ -52,9 +53,9 @@ const Estacionamentos = ({ navigation }) => {
           data={estacionamento}
           renderItem={({ item }) => {
             return (
-              <Center style={{marginTop: '20px'}}>
+              <Center style={{ marginTop: '20px' }}>
                 <View style={styles.container}>
-                  <View style={{marginLeft: '25px'}}>
+                  <View style={{ marginLeft: '25px' }}>
                     <Text style={styles.text}>
                       <Text style={styles.text2}>Estacionamento: </Text>{item.nome}
                     </Text>
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 5,
     justifyContent: 'space-between'
-        
+
   },
 
   containerBotao: {

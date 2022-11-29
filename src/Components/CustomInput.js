@@ -21,11 +21,15 @@ export default CustomInput
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#FFF',
-        width: '85%',
         marginVertical: 5,
         borderRadius: 5,
-        border: 'none'
+        borderWidth: '1px',
+        borderRadius: 5,
+        borderColor: '#E4E4E4',
+        outlineColor: "#FFF",
+        width: '85%',
+        backgroundColor: '#F8F8F8',
+        paddingHorizontal: 20
     },
 
     input: {

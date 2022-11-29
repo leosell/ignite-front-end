@@ -63,6 +63,7 @@ const Login = ({ navigation }) => {
                         <TextInput
                             placeholder='Senha'
                             value={password}
+                            secureTextEntry={true}
                             onChangeText={setPassword}
                             style={styles.caixaInputs}
                         />
@@ -120,7 +121,6 @@ const Login = ({ navigation }) => {
                             <FontAwesome5
                                 name="facebook"
                                 size={20}
-                                color='#000'
                                 style={{ marginLeft: '-30px'}}
                             />
                             <Text style={{ marginTop: '-18px' }}>Entrar com o Facebook</Text>

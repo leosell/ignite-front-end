@@ -1,6 +1,7 @@
 import { Picker, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View, Pressable } from 'react-native'
 import React, { useContext, useState } from 'react'
 import { AntDesign } from '@expo/vector-icons'
+import { Center, Wrap } from 'native-base'
 
 import CustomInput from '../../Components/CustomInput'
 
@@ -11,15 +12,15 @@ import { Context } from '../../Context/authContext'
 const RegisterEstacionamento = ({ navigation }) => {
     const { state, dispatch } = useContext(Context)
 
-    const [ nome, setNome ] = useState('')
-    const [ cnpj, setCnpj ] = useState('')
-    const [ endereco, setEndereco ] = useState('')
-    const [ numero, setNumero ] = useState('')
-    const [ bairro, setBairro ] = useState('')
-    const [ cidade, setCidade ] = useState('')
-    const [ estado, setEstado ] = useState('')
-    const [ funcionamento, setFuncionamento ] = useState('')
-    const [ horario, setHorario ] = useState('')
+    const [nome, setNome] = useState('')
+    const [cnpj, setCnpj] = useState('')
+    const [endereco, setEndereco] = useState('')
+    const [numero, setNumero] = useState('')
+    const [bairro, setBairro] = useState('')
+    const [cidade, setCidade] = useState('')
+    const [estado, setEstado] = useState('')
+    const [funcionamento, setFuncionamento] = useState('')
+    const [horario, setHorario] = useState('')
 
     const { height } = useWindowDimensions()
 
@@ -58,6 +59,12 @@ const RegisterEstacionamento = ({ navigation }) => {
     }
     return (
         <View>
+            <View style={{ flexDirection: 'row', padding: '25px' }}>
+                <Pressable onPress={() => navigation.navigate("RegisterEstacionamento")}>
+                    <AntDesign name="arrowleft" size={24} color="black" />
+                </Pressable>
+                <Text style={{ marginLeft: '5px', fontWeight: '500' }}>Voltar</Text>
+            </View>
             <View style={{ padding: 30 }}>
                 <Pressable
                     onPress={() => navigation.navigate('Estacionamentos')}
@@ -75,7 +82,7 @@ const RegisterEstacionamento = ({ navigation }) => {
             </View>
 
             <View style={styles.view}>
-                <CustomInput 
+                <CustomInput
                     placeholder='Nome Estabelezimento'
                     value={nome}
                     setValue={setNome}
@@ -86,31 +93,31 @@ const RegisterEstacionamento = ({ navigation }) => {
                     value={cnpj}
                     setValue={setCnpj}
                 />
-                
+
                 <CustomInput
                     placeholder='Endereço'
                     value={endereco}
                     setValue={setEndereco}
                 />
-                
+
                 <CustomInput
                     placeholder='Número'
                     value={numero}
                     setValue={setNumero}
                 />
-                
+
                 <CustomInput
                     placeholder='Bairro'
                     value={bairro}
                     setValue={setBairro}
                 />
-                
+
                 <CustomInput
                     placeholder='Cidade'
                     value={cidade}
                     setValue={setCidade}
                 />
-                
+
                 <CustomInput
                     placeholder='Estado'
                     value={estado}

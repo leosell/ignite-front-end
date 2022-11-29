@@ -19,7 +19,7 @@ export default CustomButton
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#FFC978',
-        width: '85%',
+        width: '100%',
         marginVertical: 5,
         alignItems: 'center',
         borderRadius: 5,
