@@ -37,14 +37,14 @@ const RegisterUser = ({ navigation }) => {
                 <Pressable onPress={() => navigation.navigate("Login")}>
                     <AntDesign name="arrowleft" size={24} color="black" />
                 </Pressable>
-                <Text style={{ marginLeft: '5px', fontWeight: '500' }}>Voltar</Text>
+                <Text style={{ marginLeft: '5px', marginTop: '4px', fontWeight: '500' }}>Voltar</Text>
             </View>
 
-            <Box style={{ alignItems: 'center', justifyContent: 'center' }}>
+            <Box style={{marginTop: '50px', alignItems: 'center', justifyContent: 'center' }}>
                 <Text style={{ fontSize: '32px', fontWeight: 'bolder', marginBottom: '25px' }}>Cadastro</Text>
                 <Text style={{ fontWeight: '500', textAlign: 'center' }}>Preencha os campos e comece a navegar pela nossa plataforma!</Text>
 
-                <Box style={{ marginTop: '25px', width: '100%' }}>
+                <Box style={{ marginTop: '150px', width: '100%' }}>
                     <TextInput
                         placeholder='Nome'
                         value={nome}
@@ -70,7 +70,7 @@ const RegisterUser = ({ navigation }) => {
                         style={styles.caixaInputs}
                     />
 
-                    <Box>
+                    <Box style={{ marginTop: '200px' }}>
                         <Checkbox>
                             <Text> Eu concordo com os <a style={{ color: '#FFBA59', textDecoration: 'underline' }}>Termos e condições</a> e a <a style={{ color: '#FFBA59', textDecoration: 'underline' }}> Política de privacidade. </a></Text>
                         </Checkbox>
@@ -89,7 +89,6 @@ const RegisterUser = ({ navigation }) => {
                         </Center>
                     </TouchableOpacity>
                 </Box>
-
             </Box>
         </View>
     )
