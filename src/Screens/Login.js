@@ -52,7 +52,7 @@ const Login = ({ navigation }) => {
                 <Box style={styles.inputs}>
                     <Box style={styles.inputsSeparado}>
                         <TextInput
-                            placeholder='Usuário'
+                            placeholder='Email'
                             value={email}
                             onChangeText={setEmail}
                             style={styles.caixaInputs}
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
 
     topo: {
         justifyContent: 'center',
-        paddingVertical: 100
+        paddingVertical: 30
     },
 
     image: {
@@ -148,7 +148,8 @@ const styles = StyleSheet.create({
     },
 
     loginImage: {
-        marginTop: -50
+        marginTop: -40,
+        marginBottom: 30
     },
 
     inputs: {
@@ -158,7 +159,8 @@ const styles = StyleSheet.create({
     },
 
     inputsSeparado: {
-        paddingVertical: 20,
+        paddingVertical: 10,
+        marginTop: 10
     },
 
     caixaInputs: {

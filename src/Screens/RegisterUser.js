@@ -3,15 +3,17 @@ import React, { useState } from 'react';
 import api from '../API'
 import CustomButton from "../Components/CustomButton";
 import { AntDesign } from '@expo/vector-icons';
-import { Box, Center, Checkbox } from 'native-base'
+import { Box, Center, Checkbox, Button } from 'native-base' 
+import Swal from "sweetalert2";
 
 const RegisterUser = ({ navigation }) => {
-    const [nome, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [nome, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
 
     const onRegisterPressed = async () => {
+
         try {
             const data = await api.post('/usuario/register', {
                 nome: nome,
@@ -26,9 +28,29 @@ const RegisterUser = ({ navigation }) => {
             } else {
                 console.log(data)
             }
+
         } catch (err) {
             console.log(err);
+            if (err != null) {
+                const toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+    
+                toast.fire({
+                    icon: 'error',
+                    title: err.response.data.message
+                })
+            }
         }
+
     }
 
     return (
@@ -44,7 +66,7 @@ const RegisterUser = ({ navigation }) => {
                 <Text style={{ fontSize: '32px', fontWeight: 'bolder', marginBottom: '25px' }}>Cadastro</Text>
                 <Text style={{ fontWeight: '500', textAlign: 'center' }}>Preencha os campos e comece a navegar pela nossa plataforma!</Text>
 
-                <Box style={{ marginTop: '150px', width: '100%' }}>
+                <Box style={{ marginTop: '70px', width: '100%' }}>
                     <TextInput
                         placeholder='Nome'
                         value={nome}
@@ -70,7 +92,7 @@ const RegisterUser = ({ navigation }) => {
                         style={styles.caixaInputs}
                     />
 
-                    <Box style={{ marginTop: '200px' }}>
+                    <Box style={{ marginTop: '70px', marginBottom: '10px' }}>
                         <Checkbox>
                             <Text> Eu concordo com os <a style={{ color: '#FFBA59', textDecoration: 'underline' }}>Termos e condições</a> e a <a style={{ color: '#FFBA59', textDecoration: 'underline' }}> Política de privacidade. </a></Text>
                         </Checkbox>
