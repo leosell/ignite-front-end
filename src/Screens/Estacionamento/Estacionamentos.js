@@ -81,7 +81,7 @@ const Estacionamentos = ({ navigation }) => {
                       >
                         <Entypo
                           name='trash'
-                          size={30}
+                          size={28}
                           color='#000'
                         />
                       </TouchableOpacity>
@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
   containerBotao: {
     width: '20%',
     paddingVertical: 15,
+    marginRight: 10
   },
 
   botao: {

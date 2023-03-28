@@ -9,9 +9,21 @@ import { Context } from '../../Context/authContext'
 import Map from '../../../assets/images/Map.jpeg'
 
 import Carteira from '../Carteira/Carteira'
+import Swal from 'sweetalert2';
 
 
 const Home = ({ navigation }) => {
+
+  const modalActive = () => {
+    Swal.fire({
+      title: 'Perfil',
+      html:
+        '<input id="swal-input1">' +
+        '<input id="swal-input2">',
+      showConfirmButton: true,
+      showCancelButton: true
+    })
+  }
 
   const notificacao = () => {
     alert('Em desenvolvimento...')
@@ -30,7 +42,7 @@ const Home = ({ navigation }) => {
     <View style={styles.tela}>
       <View style={styles.cabecalho}>
         <Pressable
-          onPress={() => setModalVisible(true)}
+          onPress={() => modalActive()}
           style={styles.perfil}
         >
           <FontAwesome
@@ -96,7 +108,7 @@ const Home = ({ navigation }) => {
 
       </View>
 
-      <View style={styles.centeredView}>
+      {/* <View style={styles.centeredView}>
         <Modal
           animationType='slide'
           transparent={true}
@@ -157,7 +169,7 @@ const Home = ({ navigation }) => {
           </Center>
 
         </Modal>
-      </View >
+      </View > */}
     </View>
 
   )
@@ -249,8 +261,8 @@ const styles = StyleSheet.create({
   },
 
   imagemMapa: {
-    width: 400,
-    height: 500,
+    width: '90%',
+    height: 450,
     marginTop: '40px',
     borderRadius: '10px',
     border: '1px solid black',

@@ -16,21 +16,40 @@ carteira.get('/busca', async (req, res) => {
 
 carteira.post('/register', async (req, res) => {
     const { saldo, idUsuario } = req.body
-    console.log(idUsuario)
 
     const novoSaldo = new Carteira({ saldo, idUsuario })
-    const salvarSaldo = await novoSaldo.save({ where: { idUsuario } }).catch((error) => {
-        console.log(error)
-        res
-            .status(500)
-            .json({ error: 'Não foi possivel inserir seu saldo!' })
-    })
+    console.log('leu 1')
+    // const idExistCarteira = await Carteira.findOne({ where: { idUsuario } }).catch((err) => `Error: ${err}`)
+    console.log('leu 2')
 
-    if (salvarSaldo) {
-        res
-            .status(200)
-            .json({ message: 'Saldo salvo com sucesso!' })
+    const idExistCarteira = await Carteira.findAll().catch((err) => console.log(`Error: ${err}`))
+
+    const carteiraExist = idExistCarteira.map(busca => busca.idUsuario)
+    console.log(carteiraExist[0])
+
+
+    if (idUsuario == carteiraExist[0]) {
+        const newSaldo = idExistCarteira.saldo + saldo
+        console.log(newSaldo)
+        await Carteira.update({ saldo: newSaldo }, { where: { idUsuario } }).catch((err) => {
+            console.log(`Error: ${err}`)
+        })
+    } else {
+        const salvarSaldo = await novoSaldo.save({ where: { idUsuario } }).catch((error) => {
+            console.log(error)
+            res
+                .status(500)
+                .json({ error: 'Não foi possivel inserir seu saldo!' })
+        })
+    
+        if (salvarSaldo) {
+            
+            res
+                .status(200)
+                .json({ message: 'Saldo salvo com sucesso!' })
+        }
     }
+
 })
 
 export default carteira

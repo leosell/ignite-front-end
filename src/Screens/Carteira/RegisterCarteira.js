@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { AntDesign, Ionicons, MaterialIcons, Entypo, FontAwesome5, SimpleLineIcons } from '@expo/vector-icons'
 import api from '../../API'
 import { Context } from '../../Context/authContext'
-import { Box, Input, Center, Button } from 'native-base'
+import { Box, Input, Center, Button, Flex } from 'native-base'
 import { BlurView } from 'expo-blur';
 
 
@@ -99,19 +99,19 @@ const RegisterCarteira = ({ navigation }) => {
                         <Text style={styles.textoBotao}>Convidar</Text>
                     </View>
                 </View>
-                <Text style={{ padding: '15px', fontWeight: '600' }}>Histórico</Text>
-                <Box>
-                    <Box>
-                        <Center>
+                <Box style={{  }}>
+                    <Box style={{ justifyContent: 'center', alignItems: 'center' }}>
+                        <Box style={{  }}>
+                            <Text style={{ fontWeight: '600' }}>Histórico</Text>
                             <Input
                                 variant="filled"
-                                mx='1' w='95%'
                                 placeholder='Buscar'
                                 backgroundColor='#FFC978'
                                 color='#000'
                                 placeholderTextColor='#000'
                             />
-
+                        </Box>
+                        <Center style={{  }}>
                             <ScrollView>
                                 <FlatList
                                     data={carteira}
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
     ContainerBotoes: {
         flex: 1,
         flexDirection: 'row',
-        gap: '60px',
+        gap: '30px',
         justifyContent: 'center'
     },
     botao: {
@@ -226,7 +226,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     botao1: {
-        textAlign: 'center',
+        alignItems: 'center',
+        gap: "3px"
     },
     textoBotao: {
         fontWeight: 600

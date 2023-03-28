@@ -45,6 +45,11 @@ const reducer = (state, action) => {
                 ...state,
                 update: action.payload
             }
+        case "saldo":
+            return {
+                ...state,
+                valor: action.payload.saldo
+            }
         default:
             return state
     }

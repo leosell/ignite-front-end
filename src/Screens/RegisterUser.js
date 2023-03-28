@@ -23,7 +23,22 @@ const RegisterUser = ({ navigation }) => {
             });
             if (data.status === 200) {
                 console.log(data)
-                alert(data.data.message)
+                const toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+    
+                toast.fire({
+                    icon: 'success',
+                    title: data.data.message
+                })
                 navigation.navigate('Login')
             } else {
                 console.log(data)
