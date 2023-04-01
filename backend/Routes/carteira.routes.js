@@ -22,16 +22,16 @@ carteira.post('/register', async (req, res) => {
     // const idExistCarteira = await Carteira.findOne({ where: { idUsuario } }).catch((err) => `Error: ${err}`)
     console.log('leu 2')
 
-    const idExistCarteira = await Carteira.findAll().catch((err) => console.log(`Error: ${err}`))
+    const idExistCarteira = await Carteira.findOne({ where: { idUsuario } }).catch((err) => console.log(`Error: ${err}`))
+    console.log(idExistCarteira)
 
-    const carteiraExist = idExistCarteira.map(busca => busca.idUsuario)
-    console.log(carteiraExist[0])
+    if (idUsuario == idExistCarteira.idUsuario) {
 
+        let novoSaldo = 0
 
-    if (idUsuario == carteiraExist[0]) {
-        const newSaldo = idExistCarteira.saldo + saldo
-        console.log(newSaldo)
-        await Carteira.update({ saldo: newSaldo }, { where: { idUsuario } }).catch((err) => {
+        novoSaldo = parseFloat(idExistCarteira.saldo) + parseFloat(saldo)
+        console.log(novoSaldo)
+        await Carteira.update({ saldo: novoSaldo }, { where: { idUsuario } }).catch((err) => {
             console.log(`Error: ${err}`)
         })
     } else {

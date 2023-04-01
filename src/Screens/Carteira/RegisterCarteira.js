@@ -99,42 +99,41 @@ const RegisterCarteira = ({ navigation }) => {
                         <Text style={styles.textoBotao}>Convidar</Text>
                     </View>
                 </View>
-                <Box style={{  }}>
-                    <Box style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <Box style={{  }}>
-                            <Text style={{ fontWeight: '600' }}>Histórico</Text>
-                            <Input
-                                variant="filled"
-                                placeholder='Buscar'
-                                backgroundColor='#FFC978'
-                                color='#000'
-                                placeholderTextColor='#000'
-                            />
-                        </Box>
-                        <Center style={{  }}>
-                            <ScrollView>
-                                <FlatList
-                                    data={carteira}
-                                    renderItem={({ item }) => {
-                                        return (
-                                            <View style={{ flexDirection: 'row', padding: '20px', justifyContent: 'center', alignContent: 'center', alignItems: 'center' }}>
-                                                <Ionicons name="add-circle-outline" size={44} color="black" />
-                                                <Box>
-                                                    <Box style={{ flexDirection: 'row', gap: '250px' }}>
-                                                        <Text style={{ fontSize: '14px', fontWeight: '600' }}>Crédito Adicionado</Text>
-                                                        <Text style={{ color: 'gray' }}>{item.dataTransferencia}</Text>
-                                                    </Box>
-                                                    <Text style={{ color: 'gray' }}>Cartão de crédito</Text>
-                                                    <Text style={{ color: 'gray' }}>R${item.saldo}</Text>
-                                                </Box>
-                                            </View>
-                                        )
-                                    }}
-                                    keyExtractor={(item) => item.id}
-                                />
-                            </ScrollView>
-                        </Center>
+                
+                <Box style={{ width: '100%' }}>
+                    <Box style={{ marginTop: '15px', width: '85%', marginLeft: 'auto', marginRight: 'auto' }}>
+                        <Text style={{ fontWeight: '600', marginBottom: '4px' }}>Histórico</Text>
+                        <Input
+                            variant="filled"
+                            placeholder='Buscar'
+                            backgroundColor='#FFC978'
+                            color='#000'
+                            placeholderTextColor='#000'
+                        />
                     </Box>
+                    
+                    <ScrollView style={{ marginTop: '10px' }}>
+                        <FlatList
+                            data={carteira}
+                            style={{ width: '100%' }}
+                            renderItem={({ item }) => {
+                                return (
+                                    <View style={{ flexDirection: 'row', alignItems: 'center', width: '100%', paddingLeft: '20px', paddingRight: '20px', display: 'flex', paddingTop: '10px' }}>
+                                        <Ionicons name="add-circle-outline" size={44} color="black" />
+                                        <Box style={{  }}>
+                                            <Box style={{ flexDirection: 'row' }}>
+                                                <Text style={{ fontSize: '14px', fontWeight: '600' }}>Crédito Adicionado</Text>
+                                                <Text style={{ color: 'gray' }}>{item.dataTransferencia}</Text>
+                                            </Box>
+                                            <Text style={{ color: 'gray' }}>Cartão de crédito</Text>
+                                            <Text style={{ color: 'gray' }}>R${item.saldo}</Text>
+                                        </Box>
+                                    </View>
+                                )
+                            }}
+                            keyExtractor={(item) => item.id}
+                        />
+                    </ScrollView>
                 </Box>
             </View>
 
@@ -198,7 +197,6 @@ const styles = StyleSheet.create({
     textoDinheiro: {
         fontSize: '30px',
         fontWeight: '600'
-        // padding: '5px',
     },
 
     conta: {
@@ -238,8 +236,6 @@ const styles = StyleSheet.create({
         marginTop: '50%',
         borderRadius: '20px',
         color: 'white',
-
-        // color='white' bg='gray.100' fontWeight={400} marginTop={'50%'}
     },
     botaoSaldo: {
         backgroundColor: '#FFC978',
