@@ -2,8 +2,8 @@ import Sequelize from "sequelize";
 import conectando from "../config/chaves_db.js";
 import Usuario from "./Usuario.js";
 
-const Carteira = conectando.define(
-    'carteira',
+const RegistroCarteira = conectando.define(
+    'registroCarteira',
     {
         id: {
             type: Sequelize.INTEGER,
@@ -21,21 +21,20 @@ const Carteira = conectando.define(
             }
         },
 
-        saldoTotal: {
+        valor: {
             type: Sequelize.FLOAT,
             allowNull: false
         },
 
-        dataAtualizacao: {
+        dataTransferencia: {
             type: Sequelize.DATE,
-            allowNull: true
+            allowNull: false
         }
     }
-
 )
 
-Carteira.belongsTo(Usuario, {
+RegistroCarteira.belongsTo(Usuario, {
     foreignKey: 'idUsuario'
-});
+})
 
-export default Carteira;
+export default RegistroCarteira;

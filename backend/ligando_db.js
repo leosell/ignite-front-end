@@ -2,6 +2,7 @@ import conectando from "./config/chaves_db.js";
 import Usuario from "./models/Usuario.js";
 import Estacionamento from "./models/Estacionamento.js";
 import Carteira from "./models/Carteira.js";
+import RegistroCarteira from "./models/RegistroCarteira.js";
 
 const ligando_db = async () => {
     try {

@@ -18,23 +18,10 @@ carteira.post('/register', async (req, res) => {
     const { saldo, idUsuario } = req.body
 
     const novoSaldo = new Carteira({ saldo, idUsuario })
-    console.log('leu 1')
-    // const idExistCarteira = await Carteira.findOne({ where: { idUsuario } }).catch((err) => `Error: ${err}`)
-    console.log('leu 2')
 
     const idExistCarteira = await Carteira.findOne({ where: { idUsuario } }).catch((err) => console.log(`Error: ${err}`))
-    console.log(idExistCarteira)
 
-    if (idUsuario == idExistCarteira.idUsuario) {
-
-        let novoSaldo = 0
-
-        novoSaldo = parseFloat(idExistCarteira.saldo) + parseFloat(saldo)
-        console.log(novoSaldo)
-        await Carteira.update({ saldo: novoSaldo }, { where: { idUsuario } }).catch((err) => {
-            console.log(`Error: ${err}`)
-        })
-    } else {
+    if (idUsuario == idExistCarteira) {
         const salvarSaldo = await novoSaldo.save({ where: { idUsuario } }).catch((error) => {
             console.log(error)
             res
@@ -48,6 +35,14 @@ carteira.post('/register', async (req, res) => {
                 .status(200)
                 .json({ message: 'Saldo salvo com sucesso!' })
         }
+    } else {
+        let novoSaldo = 0
+
+        novoSaldo = parseFloat(idExistCarteira.saldo) + parseFloat(saldo)
+        console.log(novoSaldo)
+        await Carteira.update({ saldo: novoSaldo }, { where: { idUsuario } }).catch((err) => {
+            console.log(`Error: ${err}`)
+        })
     }
 
 })

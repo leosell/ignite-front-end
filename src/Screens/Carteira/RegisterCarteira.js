@@ -66,7 +66,7 @@ const RegisterCarteira = ({ navigation }) => {
                             <SimpleLineIcons style={{ marginTop: '10px' }} name="wallet" size={24} color="black" />
                         </Pressable>
                     </View>
-                    <View>
+                    <View style={{ marginLeft: '5px' }}>
                         <Text style={styles.textoConta}>Saldo Disponível</Text>
                         <Text style={styles.textoDinheiro}>R$ {state.valor}</Text>
                     </View>
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
     ContainerBotoes: {
         flex: 1,
         flexDirection: 'row',
-        gap: '30px',
+        gap: '38px',
         justifyContent: 'center'
     },
     botao: {
