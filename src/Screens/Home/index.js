@@ -25,10 +25,6 @@ const Home = ({ navigation }) => {
     })
   }
 
-  const notificacao = () => {
-    alert('Em desenvolvimento...')
-  }
-
   const { state, dispatch } = useContext(Context)
 
   const [modalVisible, setModalVisible] = useState(false)

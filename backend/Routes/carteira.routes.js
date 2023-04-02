@@ -3,46 +3,56 @@ import Carteira from '../models/Carteira.js'
 
 const carteira = express.Router()
 
-carteira.get('/busca', async (req, res) => {
-    const carteira = await Carteira.findAll().catch((error) => console.log(error))
+carteira.get('/busca/:id', async (req, res) => {
+    const id = req.params
+    const idUsuario = id.id
+    console.log(idUsuario)
+    const carteira = await Carteira.findOne({ where: { idUsuario } }).catch((error) => console.log(error))
 
     if (carteira) {
+        const saldo = carteira.saldoTotal
         return res
-            .json({carteira})
+            .json({saldo})
     } else {
         return null
     }
 })
 
 carteira.post('/register', async (req, res) => {
-    const { saldo, idUsuario } = req.body
+    const { saldoTotal, idUsuario } = req.body
 
-    const novoSaldo = new Carteira({ saldo, idUsuario })
+    const existUser = await Carteira.findOne(
+        { where: { idUsuario } }
+    ).catch((error) => {
+        console.log(error)
+    })
 
-    const idExistCarteira = await Carteira.findOne({ where: { idUsuario } }).catch((err) => console.log(`Error: ${err}`))
+    const user = existUser
 
-    if (idUsuario == idExistCarteira) {
-        const salvarSaldo = await novoSaldo.save({ where: { idUsuario } }).catch((error) => {
+    if (user) {
+        console.log(existUser.saldoTotal)
+        const newSaldo = parseFloat(existUser.saldoTotal) + parseFloat(saldoTotal)
+
+        await Carteira.update(
+            { saldoTotal: newSaldo }, 
+            { where: { idUsuario } }
+        ).catch((error) => {
             console.log(error)
-            res
-                .status(500)
-                .json({ error: 'Não foi possivel inserir seu saldo!' })
         })
-    
-        if (salvarSaldo) {
-            
-            res
-                .status(200)
-                .json({ message: 'Saldo salvo com sucesso!' })
-        }
+        return res
+            .status(200)
+            .json({ message: 'Saldo atualizado com sucesso'})
     } else {
-        let novoSaldo = 0
-
-        novoSaldo = parseFloat(idExistCarteira.saldo) + parseFloat(saldo)
-        console.log(novoSaldo)
-        await Carteira.update({ saldo: novoSaldo }, { where: { idUsuario } }).catch((err) => {
-            console.log(`Error: ${err}`)
+        const newWallet = new Carteira({ saldoTotal, idUsuario })
+        await newWallet.save(
+            { where: { idUsuario } }
+        ).catch((error) => {
+            console.log(error)
+            res.status(500).json({ message: 'Não foi impossivel inserir seu saldo!\n Contate um administrador!'})
         })
+        return res
+            .status(200)
+            .json({ message: 'Inserção de saldo salva com sucesso!'})
     }
 
 })

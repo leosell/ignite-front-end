@@ -43,7 +43,8 @@ const reducer = (state, action) => {
         case "update":
             return {
                 ...state,
-                update: action.payload
+                update: action.payload,
+                Loading: false
             }
         case "saldo":
             return {

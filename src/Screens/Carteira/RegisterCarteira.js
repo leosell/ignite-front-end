@@ -5,13 +5,14 @@ import api from '../../API'
 import { Context } from '../../Context/authContext'
 import { Box, Input, Center, Button, Flex } from 'native-base'
 import { BlurView } from 'expo-blur';
+import Swal from 'sweetalert2'
 
 
 
 const RegisterCarteira = ({ navigation }) => {
     const { state, dispatch } = useContext(Context)
 
-    const [saldo, setSaldo] = useState('')
+    const [saldoTotal, setSaldoTotal] = useState('')
     const [modalVisible, setModalVisible] = useState(false)
 
     const [carteira, setCarteira] = useState({})
@@ -20,14 +21,31 @@ const RegisterCarteira = ({ navigation }) => {
     const onRegisterPressed = async () => {
         try {
             const authData = await api.post('/carteira/register', {
-                saldo: saldo,
+                saldoTotal: saldoTotal,
                 idUsuario: state.idUser
             })
 
             if (authData.status === 200) {
-                alert(authData.data.message)
-                setSaldo('')
-                dispatch({ type: 'update', payload: true })
+                const toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+    
+                toast.fire({
+                    icon: 'success',
+                    title: 'Saldo atualizado com sucesso'
+                })
+                setSaldoTotal('')
+                setModalVisible(false)
+                screenLoad()
+                dispatch({ type: 'update', payload: true})
             }
         } catch (error) {
             console.log(error)
@@ -38,11 +56,13 @@ const RegisterCarteira = ({ navigation }) => {
         alert('Em desenvolvimento...')
     }
 
+    const screenLoad = async () => {
+        const id = state.idUser
+        const list = await api.get('/carteira/busca/' + id)
+        setCarteira(list.data)
+    }
+
     useEffect(() => {
-        const screenLoad = async () => {
-            const list = await api.get('/carteira/busca')
-            setCarteira(list.data.carteira)
-        }
         screenLoad()
     }, [update])
 
@@ -68,7 +88,7 @@ const RegisterCarteira = ({ navigation }) => {
                     </View>
                     <View style={{ marginLeft: '5px' }}>
                         <Text style={styles.textoConta}>Saldo Disponível</Text>
-                        <Text style={styles.textoDinheiro}>R$ {state.valor}</Text>
+                        <Text style={styles.textoDinheiro}>R$ {carteira.saldo}</Text>
                     </View>
                 </View>
 
@@ -123,7 +143,7 @@ const RegisterCarteira = ({ navigation }) => {
                                         <Box style={{  }}>
                                             <Box style={{ flexDirection: 'row' }}>
                                                 <Text style={{ fontSize: '14px', fontWeight: '600' }}>Crédito Adicionado</Text>
-                                                <Text style={{ color: 'gray' }}>{item.dataTransferencia}</Text>
+                                                <Text style={{ color: 'gray' }}>{item.saldo}</Text>
                                             </Box>
                                             <Text style={{ color: 'gray' }}>Cartão de crédito</Text>
                                             <Text style={{ color: 'gray' }}>R${item.saldo}</Text>
@@ -154,7 +174,7 @@ const RegisterCarteira = ({ navigation }) => {
                                     <Center>
                                         {/* <Text style={{}}>Adicionar</Text> */}
                                         <Text style={{ fontWeight: '400', marginBottom: '25px', fontSize: '24px' }}>Adicionar</Text>
-                                        <Input variant="underlined" placeholder='R$: 0.00' type='' value={saldo} onChangeText={setSaldo} />
+                                        <Input variant="underlined" placeholder='R$: 0.00' type='' value={saldoTotal} onChangeText={setSaldoTotal} />
                                         <Button size='sm' onPress={onRegisterPressed} style={styles.botaoSaldo}>
                                             <Text style={{ fontSize: '16px' }}>Inserir Saldo</Text>
                                         </Button>

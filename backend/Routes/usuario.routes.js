@@ -23,7 +23,6 @@ usuario.post('/register', async (req, res) => {
 
     const novoUsuario = new Usuario({ nome, email, password })
     const salvarUsuario = await novoUsuario.save().catch((error) => {
-        new Carteira()
         console.log(`Error ${error}`)
         res
             .status(500)
