@@ -11,10 +11,8 @@ import Swal from 'sweetalert2'
 
 const RegisterCarteira = ({ navigation }) => {
     const { state, dispatch } = useContext(Context)
-
     const [saldoTotal, setSaldoTotal] = useState('')
     const [modalVisible, setModalVisible] = useState(false)
-
     const [carteira, setCarteira] = useState({})
     const [update, setUpdate] = useState(false)
 
@@ -53,13 +51,28 @@ const RegisterCarteira = ({ navigation }) => {
     }
 
     const notificacao = () => {
-        alert('Em desenvolvimento...')
+        const toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        toast.fire({
+            icon: 'info',
+            title: 'Funcionalidade em desenvolvimento'
+        })
     }
 
     const screenLoad = async () => {
         const id = state.idUser
         const list = await api.get('/carteira/busca/' + id)
-        setCarteira(list.data)
+        setCarteira(list.data.saldo)
     }
 
     useEffect(() => {
@@ -88,7 +101,7 @@ const RegisterCarteira = ({ navigation }) => {
                     </View>
                     <View style={{ marginLeft: '5px' }}>
                         <Text style={styles.textoConta}>Saldo Disponível</Text>
-                        <Text style={styles.textoDinheiro}>R$ {carteira.saldo}</Text>
+                        <Text style={styles.textoDinheiro}>R$ {carteira.saldoTotal ? carteira.saldoTotal : '0,00'}</Text>
                     </View>
                 </View>
 
@@ -134,24 +147,25 @@ const RegisterCarteira = ({ navigation }) => {
                     
                     <ScrollView style={{ marginTop: '10px' }}>
                         <FlatList
-                            data={carteira}
+                            data={carteira.data}
                             style={{ width: '100%' }}
                             renderItem={({ item }) => {
+                                console.log(item)
                                 return (
                                     <View style={{ flexDirection: 'row', alignItems: 'center', width: '100%', paddingLeft: '20px', paddingRight: '20px', display: 'flex', paddingTop: '10px' }}>
                                         <Ionicons name="add-circle-outline" size={44} color="black" />
-                                        <Box style={{  }}>
+                                        <Box>
                                             <Box style={{ flexDirection: 'row' }}>
                                                 <Text style={{ fontSize: '14px', fontWeight: '600' }}>Crédito Adicionado</Text>
-                                                <Text style={{ color: 'gray' }}>{item.saldo}</Text>
+                                                <Text style={{ color: 'gray' }}>{}</Text>
                                             </Box>
                                             <Text style={{ color: 'gray' }}>Cartão de crédito</Text>
-                                            <Text style={{ color: 'gray' }}>R${item.saldo}</Text>
+                                            <Text style={{ color: 'gray' }}>R${item.saldoTotal}</Text>
                                         </Box>
                                     </View>
                                 )
                             }}
-                            keyExtractor={(item) => item.id}
+                            keyExtractor={(item) => item.idUsuario}
                         />
                     </ScrollView>
                 </Box>

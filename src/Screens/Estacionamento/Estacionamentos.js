@@ -14,18 +14,23 @@ const Estacionamentos = ({ navigation }) => {
   const [update, setUpdate] = useState(false)
   const [estacionamento, setEstacionamento] = useState({})
 
-  useEffect(() => {
-    const screenLoad = async () => {
-      const list = await api.get('/estacionamento/busca')
-      setEstacionamento(list.data.estacionamento)
-    }
+  const screenLoad = async () => {
+    const list = await api.get('/estacionamento/busca')
+    setEstacionamento(list.data.estacionamento)
+  }
+
+  useEffect(() => { 
     screenLoad()
   }, [update])
 
   const deletarId = async (id) => {
-    console.log(id)
     await api.delete(`/estacionamento/${id}`)
     setUpdate(!update)
+  }
+
+  const atualizarEstacionamento = async (id) => {
+    console.log(id)
+    await api.put(`/update/${id}`)
   }
 
 
@@ -53,7 +58,7 @@ const Estacionamentos = ({ navigation }) => {
           data={estacionamento}
           renderItem={({ item }) => {
             return (
-              <Center style={{ marginTop: '20px' }}>
+              <Center style={{ marginTop: '0px' }}>
                 <View style={styles.container}>
                   <View style={{ marginLeft: '25px' }}>
                     <Text style={styles.text}>
@@ -74,17 +79,32 @@ const Estacionamentos = ({ navigation }) => {
                   </View>
 
                   {state.isAdmin ? (
-                    <View style={styles.containerBotao}>
-                      <TouchableOpacity
-                        onPress={() => deletarId(item.id)}
-                        style={styles.botao}
-                      >
-                        <Entypo
-                          name='trash'
-                          size={28}
-                          color='#000'
-                        />
-                      </TouchableOpacity>
+                    <View>
+                      <View style={styles.containerBotao}>
+                        <TouchableOpacity
+                          onPress={() => atualizarEstacionamento(item.id)}
+                          style={styles.botao}
+                        >
+                          <Entypo
+                            name='pencil'
+                            size={20}
+                            color='#000'
+                          />
+                        </TouchableOpacity>
+                      </View>
+                      
+                      <View style={styles.containerBotao}>
+                        <TouchableOpacity
+                          onPress={() => deletarId(item.id)}
+                          style={styles.botao}
+                        >
+                          <Entypo
+                            name='trash'
+                            size={20}
+                            color='#000'
+                          />
+                        </TouchableOpacity>
+                      </View>
                     </View>
                   ) : (
                     <></>
@@ -130,7 +150,7 @@ const styles = StyleSheet.create({
 
   containerBotao: {
     width: '20%',
-    paddingVertical: 15,
+    paddingVertical: 5,
     marginRight: 10
   },
 
@@ -140,8 +160,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFC978',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '60px',
-    height: '50px'
+    width: '50px',
+    height: '40px'
   },
 
 

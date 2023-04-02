@@ -1,18 +1,35 @@
 import { Text, Alert, Pressable, StyleSheet, View, Image, TouchableOpacity, Modal, TextInput } from 'react-native'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { AntDesign, Ionicons, Entypo, MaterialIcons, FontAwesome } from '@expo/vector-icons'
-import { Box, Input, Center, Button } from 'native-base'
-import { BlurView } from 'expo-blur';
-
-import { Context } from '../../Context/authContext'
-
-import Map from '../../../assets/images/Map.jpeg'
-
-import Carteira from '../Carteira/Carteira'
 import Swal from 'sweetalert2';
 
+import { Context } from '../../Context/authContext'
+import Map from '../../../assets/images/Map.jpeg'
+import api from '../../API'
 
 const Home = ({ navigation }) => {
+  const { state, dispatch } = useContext(Context)
+  const [carteira, setCarteira] = useState({})
+  const [update, setUpdate] = useState(false)
+
+  const alertasDesenvolvimento = () => {
+    const toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+  })
+
+  toast.fire({
+      icon: 'info',
+      title: 'Funcionalidade em desenvolvimento'
+  })
+  }
 
   const modalActive = () => {
     Swal.fire({
@@ -25,13 +42,15 @@ const Home = ({ navigation }) => {
     })
   }
 
-  const { state, dispatch } = useContext(Context)
+  const screenLoad = async () => {
+    const id = state.idUser
+    const list = await api.get('/carteira/busca/' + id)
+    setCarteira(list.data.saldo)
+}
 
-  const [modalVisible, setModalVisible] = useState(false)
-
-  const alertasDesenvolvimento = () => {
-    alert('Em desenvolvimento...')
-  }
+  useEffect(() => {
+    screenLoad()
+  }, [update])
 
   return (
 
@@ -67,7 +86,7 @@ const Home = ({ navigation }) => {
       <View style={styles.conta}>
         <View>
           <Text style={styles.textoConta}>Conta</Text>
-          <Text style={styles.textoDinheiro}>R$ {state.valor}</Text>
+          <Text style={styles.textoDinheiro}>R$ {carteira.saldoTotal ? carteira.saldoTotal : '0,00'}</Text>
         </View>
 
         <View>

@@ -12,6 +12,15 @@ const Estacionamento = conectando.define(
             primaryKey: true
         },
 
+        idUsuario: {
+            type:Sequelize.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'usuarios',
+                key: 'id'
+            }
+        },
+
         nome: {
             type: Sequelize.STRING,
             allowNull: false

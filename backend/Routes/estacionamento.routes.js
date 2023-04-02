@@ -13,8 +13,8 @@ estacionamento.get('/busca', async (req, res) => {
     }
 })
 
-estacionamento.post('/register', async (req, res) => {
-    const { nome, cnpj, endereco, numero, bairro, cidade, estado, funcionamento, horario } = req.body
+estacionamento.post('/register/', async (req, res) => {
+    const { idUsuario, nome, cnpj, endereco, numero, bairro, cidade, estado, funcionamento, horario } = req.body
 
     const verificandoEstacionamentoExistente = await Estacionamento.findOne({ where: { cnpj } }).catch((error) => console.log(error))
 
@@ -24,8 +24,8 @@ estacionamento.post('/register', async (req, res) => {
             .json({ message: 'Estacionamento já cadastrado!' })
     }
 
-    const novoEstacionamento = new Estacionamento({ nome, cnpj, endereco, numero, bairro, cidade, estado, funcionamento, horario })
-    const salvarEstacionamento = await novoEstacionamento.save().catch((error) => {
+    const novoEstacionamento = new Estacionamento({ idUsuario, nome, cnpj, endereco, numero, bairro, cidade, estado, funcionamento, horario })
+    const salvarEstacionamento = await novoEstacionamento.save({ where: { idUsuario } }).catch((error) => {
         console.log(error)
         res
             .status(500)
@@ -48,6 +48,19 @@ estacionamento.delete('/:id', async (req, res) => {
             .then(res.json(deletarId))
             .catch((error) => console.log(error))
     }
+})
+
+estacionamento.put('/update/:id', async (req, res) => {
+    /* const { nome, cnpj, endereco, numero, bairro, cidade, estado, funcionamento, horario } = req.body */
+    const id = req.params.id
+
+    const estacionamento = await Estacionamento.findOne(
+        { where: { id } }
+    ).catch((error) => {
+        console.log(error)
+    })
+
+    console.log(estacionamento)
 })
 
 export default estacionamento;

@@ -4,16 +4,17 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Entypo, AntDesign } from '@expo/vector-icons'
 
 import { Context } from '../Context/authContext'
-
 import Home from './Home'
 import EstacionamentoRoutes from './Estacionamento/EstacionamentoRoutes'
 import RegisterCarteira from './Carteira/RegisterCarteira'
 import Login from './Login'
+import api from '../API'
 
 const Tab = createBottomTabNavigator();
 
 const Routes = ({ navigation }) => {
     const { state, dispatch } = useContext(Context)
+
     return (
         <Tab.Navigator screenOptions={{ headerShown: false }}>
 

@@ -10,7 +10,7 @@ carteira.get('/busca/:id', async (req, res) => {
     const carteira = await Carteira.findOne({ where: { idUsuario } }).catch((error) => console.log(error))
 
     if (carteira) {
-        const saldo = carteira.saldoTotal
+        const saldo = carteira
         return res
             .json({saldo})
     } else {

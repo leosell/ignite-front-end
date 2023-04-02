@@ -1,16 +1,16 @@
 import { Picker, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View, Pressable } from 'react-native'
 import React, { useContext, useState } from 'react'
 import { AntDesign } from '@expo/vector-icons'
-import { Center, Wrap } from 'native-base'
 
 import CustomInput from '../../Components/CustomInput'
-
-import api from '../../API'
 import { Context } from '../../Context/authContext'
+import api from '../../API'
+import Estacionamentos from './Estacionamentos'
 
 
 const RegisterEstacionamento = ({ navigation }) => {
     const { state, dispatch } = useContext(Context)
+    const { height } = useWindowDimensions()
 
     const [nome, setNome] = useState('')
     const [cnpj, setCnpj] = useState('')
@@ -22,11 +22,10 @@ const RegisterEstacionamento = ({ navigation }) => {
     const [funcionamento, setFuncionamento] = useState('')
     const [horario, setHorario] = useState('')
 
-    const { height } = useWindowDimensions()
-
     const onRegisterPressed = async () => {
         try {
-            const authData = await api.post('/estacionamento/register', {
+            const authData = await api.post(`/estacionamento/register`, {
+                idUsuario: state.idUser,
                 nome: nome,
                 cnpj: cnpj,
                 endereco: endereco,
@@ -156,11 +155,11 @@ const styles = StyleSheet.create({
     textoRegistro: {
         justifyContent: 'center',
         alignItems: 'center',
-        paddingVertical: 40,
+        paddingVertical: 20,
     },
 
     texto: {
-        fontSize: 32,
+        fontSize: 30,
     },
 
     view: {
