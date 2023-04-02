@@ -14,6 +14,16 @@ const Estacionamentos = ({ navigation }) => {
   const [update, setUpdate] = useState(false)
   const [estacionamento, setEstacionamento] = useState({})
 
+  const [nome, setNome] = useState('')
+  const [cnpj, setCnpj] = useState('')
+  const [endereco, setEndereco] = useState('')
+  const [numero, setNumero] = useState('')
+  const [bairro, setBairro] = useState('')
+  const [cidade, setCidade] = useState('')
+  const [estado, setEstado] = useState('')
+  const [funcionamento, setFuncionamento] = useState('')
+  const [horario, setHorario] = useState('')
+
   const screenLoad = async () => {
     const list = await api.get('/estacionamento/busca')
     setEstacionamento(list.data.estacionamento)
@@ -29,8 +39,19 @@ const Estacionamentos = ({ navigation }) => {
   }
 
   const atualizarEstacionamento = async (id) => {
-    console.log(id)
-    await api.put(`/update/${id}`)
+    try {
+      const authData = await api.patch(`/update/${id}`, {
+        idUsuario: id
+      })
+
+      if (authData.status == 200) {
+        alert('Dados atualizados')
+      } else {
+        alert('Erro ao atualizar dados')
+      }
+    } catch(error) {
+      console.log(error)
+    }
   }
 
 

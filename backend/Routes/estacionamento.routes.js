@@ -50,14 +50,15 @@ estacionamento.delete('/:id', async (req, res) => {
     }
 })
 
-estacionamento.put('/update/:id', async (req, res) => {
+estacionamento.patch('/update/:id', async (req, res) => {
     /* const { nome, cnpj, endereco, numero, bairro, cidade, estado, funcionamento, horario } = req.body */
     const id = req.params.id
+    console.log(id)
 
     const estacionamento = await Estacionamento.findOne(
         { where: { id } }
     ).catch((error) => {
-        console.log(error)
+        console.log(`Error: ${error}`)
     })
 
     console.log(estacionamento)
