@@ -86,7 +86,7 @@ const Home = ({ navigation }) => {
       <View style={styles.conta}>
         <View>
           <Text style={styles.textoConta}>Conta</Text>
-          <Text style={styles.textoDinheiro}>R$ {carteira.saldoTotal ? carteira.saldoTotal : '0,00'}</Text>
+          <Text style={styles.textoDinheiro}>R$ {carteira.saldoTotal ? carteira.saldoTotal : '0.00'}</Text>
         </View>
 
         <View>

@@ -101,7 +101,7 @@ const RegisterCarteira = ({ navigation }) => {
                     </View>
                     <View style={{ marginLeft: '5px' }}>
                         <Text style={styles.textoConta}>Saldo Disponível</Text>
-                        <Text style={styles.textoDinheiro}>R$ {carteira.saldoTotal ? carteira.saldoTotal : '0,00'}</Text>
+                        <Text style={styles.textoDinheiro}>R$ {carteira.saldoTotal ? carteira.saldoTotal : '0.00'}</Text>
                     </View>
                 </View>
 
